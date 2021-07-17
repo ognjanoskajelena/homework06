@@ -34,4 +34,8 @@ public class Choice {
         this.selected = false;
         this.question = question;
     }
+
+    public void changeSelection() {
+        this.selected = !this.selected;
+    }
 }

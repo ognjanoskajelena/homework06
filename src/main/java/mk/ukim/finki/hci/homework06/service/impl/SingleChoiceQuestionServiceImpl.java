@@ -6,6 +6,7 @@ import mk.ukim.finki.hci.homework06.model.PollQuestion;
 import mk.ukim.finki.hci.homework06.model.SingleChoiceQuestion;
 import mk.ukim.finki.hci.homework06.model.exception.ChoiceNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.PollNotFoundException;
+import mk.ukim.finki.hci.homework06.model.exception.PollQuestionNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.SingleChoiceQuestionRepository;
 import mk.ukim.finki.hci.homework06.service.ChoiceService;
 import mk.ukim.finki.hci.homework06.service.PollService;
@@ -38,17 +39,17 @@ public class SingleChoiceQuestionServiceImpl implements SingleChoiceQuestionServ
     }
 
     @Override
-    public Optional<SingleChoiceQuestion> save(String content, Long pollId) {
+    public Optional<PollQuestion> save(String content, Long pollId) {
         Optional<Poll> poll = this.pollService.findById(pollId);
         if(poll.isEmpty())
             throw new PollNotFoundException(pollId);
 
-        SingleChoiceQuestion singleChoiceQuestion = new SingleChoiceQuestion(content, poll.get());
+        PollQuestion singleChoiceQuestion = new SingleChoiceQuestion(content, poll.get());
         return Optional.of(this.singleChoiceQuestionRepository.save(singleChoiceQuestion));
     }
 
     @Override
-    public Optional<SingleChoiceQuestion> save(String content, Long pollId, List<Long> choicesIds) {
+    public Optional<PollQuestion> save(String content, Long pollId, List<Long> choicesIds) {
         Optional<Poll> poll = this.pollService.findById(pollId);
         if(poll.isEmpty())
             throw new PollNotFoundException(pollId);
@@ -62,7 +63,18 @@ public class SingleChoiceQuestionServiceImpl implements SingleChoiceQuestionServ
             choiceList.add(choice.get());
         }
 
-        SingleChoiceQuestion singleChoiceQuestion = new SingleChoiceQuestion(content, poll.get(), choiceList);
+        PollQuestion singleChoiceQuestion = new SingleChoiceQuestion(content, poll.get(), choiceList);
         return Optional.of(this.singleChoiceQuestionRepository.save(singleChoiceQuestion));
+    }
+
+    @Override
+    public Optional<PollQuestion> addChoice(Long questionId, Choice choice) {
+        Optional<PollQuestion> question = this.singleChoiceQuestionRepository.findById(questionId);
+        if(question.isEmpty())
+            throw new PollQuestionNotFoundException(questionId);
+
+        PollQuestion choiceQuestion = question.get();
+        choiceQuestion.addToChoices(choice);
+        return Optional.of(this.singleChoiceQuestionRepository.save(choiceQuestion));
     }
 }

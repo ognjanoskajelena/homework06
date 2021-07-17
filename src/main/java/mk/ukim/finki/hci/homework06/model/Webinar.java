@@ -49,4 +49,8 @@ public class Webinar {
         this.initiator = initiator;
         this.interestedParticipants = new ArrayList<>();
     }
+
+    public void addToInterestedParticipants(Participant participant) {
+        this.interestedParticipants.add(participant);
+    }
 }

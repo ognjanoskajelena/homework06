@@ -3,7 +3,6 @@ package mk.ukim.finki.hci.homework06.model;
 import lombok.Data;
 import mk.ukim.finki.hci.homework06.model.enums.Role;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.time.LocalDate;
@@ -44,5 +43,9 @@ public class Participant extends User {
         super(name, surname, username, password, email, Role.ROLE_PARTICIPANT);
         this.birthDate = birthDate;
         this.initiatives = new ArrayList<>();
+    }
+
+    public void addToInitiatives(Initiative initiative) {
+        this.initiatives.add(initiative);
     }
 }

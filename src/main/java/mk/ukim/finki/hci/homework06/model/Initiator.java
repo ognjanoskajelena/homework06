@@ -4,10 +4,7 @@ import lombok.Data;
 import mk.ukim.finki.hci.homework06.model.enums.Role;
 
 import javax.persistence.Entity;
-import javax.persistence.OneToMany;
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.List;
 
 @Data
 @Entity

@@ -32,4 +32,8 @@ public class Discussion {
         this.closeDate = closeDate;
         this.initiative = initiative;
     }
+
+    public void addToComments(Comment comment) {
+        this.comments.add(comment);
+    }
 }

@@ -8,7 +8,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-public class PollQuestion {
+public abstract class PollQuestion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,4 +30,6 @@ public class PollQuestion {
         this.type = type;
         this.poll = poll;
     }
+
+    public abstract void addToChoices(Choice choice);
 }

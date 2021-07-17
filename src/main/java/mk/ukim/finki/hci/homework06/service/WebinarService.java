@@ -12,4 +12,6 @@ public interface WebinarService {
     Optional<Webinar> update(Long id, String topic, String description, String link, String date, String time);
 
     Optional<Webinar> deleteById(Long id);
+
+    Optional<Webinar> interested(Long webinarId, Long participantId);
 }

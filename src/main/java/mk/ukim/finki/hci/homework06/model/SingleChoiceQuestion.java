@@ -29,4 +29,8 @@ public class SingleChoiceQuestion extends PollQuestion {
         super(content, PollQuestionType.SINGLE, poll);
         this.choices = choices;
     }
+
+    public void addToChoices(Choice choice) {
+        this.choices.add(choice);
+    }
 }

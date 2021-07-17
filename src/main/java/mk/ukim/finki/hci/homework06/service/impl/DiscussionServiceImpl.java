@@ -1,10 +1,12 @@
 package mk.ukim.finki.hci.homework06.service.impl;
 
+import mk.ukim.finki.hci.homework06.model.Comment;
 import mk.ukim.finki.hci.homework06.model.Discussion;
 import mk.ukim.finki.hci.homework06.model.Initiative;
 import mk.ukim.finki.hci.homework06.model.exception.DiscussionNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.InitiativeNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.DiscussionRepository;
+import mk.ukim.finki.hci.homework06.service.CommentService;
 import mk.ukim.finki.hci.homework06.service.DiscussionService;
 import mk.ukim.finki.hci.homework06.service.InitiativeService;
 import org.springframework.stereotype.Service;
@@ -17,10 +19,14 @@ public class DiscussionServiceImpl implements DiscussionService {
 
     private final DiscussionRepository discussionRepository;
     private final InitiativeService initiativeService;
+    private final CommentService commentService;
 
-    public DiscussionServiceImpl(DiscussionRepository discussionRepository, InitiativeService initiativeService) {
+    public DiscussionServiceImpl(DiscussionRepository discussionRepository,
+                                 InitiativeService initiativeService,
+                                 CommentService commentService) {
         this.discussionRepository = discussionRepository;
         this.initiativeService = initiativeService;
+        this.commentService = commentService;
     }
 
     @Override
@@ -35,6 +41,16 @@ public class DiscussionServiceImpl implements DiscussionService {
             throw new InitiativeNotFoundException(initiativeId);
 
         Discussion discussion = new Discussion(topic, LocalDate.parse(closeDate), initiative.get());
+        return Optional.of(this.discussionRepository.save(discussion));
+    }
+
+    @Override
+    public Optional<Discussion> save(String topic, LocalDate closeDate, Long initiativeId) {
+        Optional<Initiative> initiative = this.initiativeService.findById(initiativeId);
+        if(initiative.isEmpty())
+            throw new InitiativeNotFoundException(initiativeId);
+
+        Discussion discussion = new Discussion(topic, closeDate, initiative.get());
         return Optional.of(this.discussionRepository.save(discussion));
     }
 
@@ -58,5 +74,17 @@ public class DiscussionServiceImpl implements DiscussionService {
             throw new DiscussionNotFoundException(id);
         this.initiativeService.deleteById(id);
         return discussion;
+    }
+
+    @Override
+    public Optional<Discussion> addComment(Long discussionId, Comment comment) {
+        Optional<Discussion> discussion = this.findById(discussionId);
+        if(discussion.isEmpty())
+            throw new DiscussionNotFoundException(discussionId);
+
+        this.commentService.save(comment);
+        Discussion updatedDiscussion = discussion.get();
+        updatedDiscussion.addToComments(comment);
+        return Optional.of(this.discussionRepository.save(updatedDiscussion));
     }
 }

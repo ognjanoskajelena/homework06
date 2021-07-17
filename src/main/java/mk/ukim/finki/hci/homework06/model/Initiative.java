@@ -25,7 +25,6 @@ public class Initiative {
     @ManyToOne
     private Initiator initiator;
 
-    /*
     @OneToMany(mappedBy = "initiative")
     private List<Event> events;
 
@@ -37,7 +36,6 @@ public class Initiative {
 
     @ManyToMany(mappedBy = "initiatives", cascade = CascadeType.REMOVE)
     private List<Participant> participants;
-    */
 
     public Initiative() {
     }
@@ -48,5 +46,27 @@ public class Initiative {
         this.dateOpened = dateOpened;
         this.participantsCount = 0;
         this.initiator = initiator;
+    }
+
+    public void addToEvents(Event event) {
+        this.events.add(event);
+    }
+
+    public void addToPolls(Poll poll) {
+        this.polls.add(poll);
+    }
+
+    public void addToDiscussions(Discussion discussion) {
+        this.discussions.add(discussion);
+    }
+
+    public void addToParticipants(Participant participant) {
+        this.participantsCount += 1;
+        this.participants.add(participant);
+    }
+
+    public void removeFromParticipants(Participant participant) {
+        this.participantsCount -= 1;
+        this.participants.add(participant);
     }
 }

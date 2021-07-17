@@ -3,6 +3,7 @@ package mk.ukim.finki.hci.homework06.service.impl;
 import mk.ukim.finki.hci.homework06.model.*;
 import mk.ukim.finki.hci.homework06.model.exception.ChoiceNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.PollNotFoundException;
+import mk.ukim.finki.hci.homework06.model.exception.PollQuestionNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.MultipleChoiceQuestionRepository;
 import mk.ukim.finki.hci.homework06.service.ChoiceService;
 import mk.ukim.finki.hci.homework06.service.MultipleChoiceQuestionService;
@@ -35,17 +36,17 @@ public class MultipleChoiceQuestionServiceImpl implements MultipleChoiceQuestion
     }
 
     @Override
-    public Optional<MultipleChoiceQuestion> save(String content, Long pollId) {
+    public Optional<PollQuestion> save(String content, Long pollId) {
         Optional<Poll> poll = this.pollService.findById(pollId);
         if(poll.isEmpty())
             throw new PollNotFoundException(pollId);
 
-        MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(content, poll.get());
+        PollQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(content, poll.get());
         return Optional.of(this.multipleChoiceQuestionRepository.save(multipleChoiceQuestion));
     }
 
     @Override
-    public Optional<MultipleChoiceQuestion> save(String content, Long pollId, List<Long> choicesIds) {
+    public Optional<PollQuestion> save(String content, Long pollId, List<Long> choicesIds) {
         Optional<Poll> poll = this.pollService.findById(pollId);
         if(poll.isEmpty())
             throw new PollNotFoundException(pollId);
@@ -59,7 +60,18 @@ public class MultipleChoiceQuestionServiceImpl implements MultipleChoiceQuestion
             choiceList.add(choice.get());
         }
 
-        MultipleChoiceQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(content, poll.get(), choiceList);
+        PollQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(content, poll.get(), choiceList);
         return Optional.of(this.multipleChoiceQuestionRepository.save(multipleChoiceQuestion));
+    }
+
+    @Override
+    public Optional<PollQuestion> addChoice(Long questionId, Choice choice) {
+        Optional<PollQuestion> question = this.multipleChoiceQuestionRepository.findById(questionId);
+        if(question.isEmpty())
+            throw new PollQuestionNotFoundException(questionId);
+
+        PollQuestion choiceQuestion = question.get();
+        choiceQuestion.addToChoices(choice);
+        return Optional.of(this.multipleChoiceQuestionRepository.save(choiceQuestion));
     }
 }

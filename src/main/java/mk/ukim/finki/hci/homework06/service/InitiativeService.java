@@ -1,9 +1,7 @@
 package mk.ukim.finki.hci.homework06.service;
 
-import mk.ukim.finki.hci.homework06.model.Initiative;
-import mk.ukim.finki.hci.homework06.model.Initiator;
+import mk.ukim.finki.hci.homework06.model.*;
 
-import java.time.LocalDate;
 import java.util.Optional;
 
 public interface InitiativeService {
@@ -14,4 +12,14 @@ public interface InitiativeService {
     Optional<Initiative> update(Long id, String title, String description, String dateOpened);
 
     Optional<Initiative> deleteById(Long id);
+
+    Optional<Initiative> addEvent(Long initiativeId, Event event);
+
+    Optional<Initiative> addPoll(Long initiativeId, Poll poll);
+
+    Optional<Initiative> addDiscussion(Long initiativeId, Discussion discussion);
+
+    Optional<Initiative> addParticipant(Long initiativeId, Long participantId);
+
+    Optional<Initiative> removeParticipant(Long initiativeId, Long participantId);
 }

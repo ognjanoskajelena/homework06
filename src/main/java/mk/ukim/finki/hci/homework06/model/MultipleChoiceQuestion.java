@@ -29,4 +29,8 @@ public class MultipleChoiceQuestion extends PollQuestion {
         super(content, PollQuestionType.MULTIPLE, poll);
         this.choices = choices;
     }
+
+    public void addToChoices(Choice choice) {
+        this.choices.add(choice);
+    }
 }

@@ -68,4 +68,15 @@ public class ChoiceServiceImpl implements ChoiceService {
         this.choiceRepository.deleteById(id);
         return choice;
     }
+
+    @Override
+    public Optional<Choice> changeSelection(Long choiceId) {
+        Optional<Choice> choice = this.findById(choiceId);
+        if(choice.isEmpty())
+            throw new ChoiceNotFoundException(choiceId);
+
+        Choice updatedChoice = choice.get();
+        updatedChoice.changeSelection();
+        return Optional.of(this.choiceRepository.save(updatedChoice));
+    }
 }

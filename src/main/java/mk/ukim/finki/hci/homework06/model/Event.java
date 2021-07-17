@@ -45,4 +45,14 @@ public class Event {
         this.initiative = initiative;
         this.goingParticipants = new ArrayList<>();
     }
+
+    public void addToGoingParticipants(Participant participant) {
+        this.goingCount += 1;
+        this.goingParticipants.add(participant);
+    }
+
+    public void removeFromGoingParticipants(Participant participant) {
+        this.goingCount -= 1;
+        this.goingParticipants.remove(participant);
+    }
 }
