@@ -23,13 +23,15 @@ public class Choice {
         this.selected = false;
     }
 
-    public Choice(String content, boolean selected) {
+    public Choice(String content, boolean selected, PollQuestion question) {
         this.content = content;
         this.selected = selected;
+        this.question = question;
     }
 
-    public Choice(String content) {
+    public Choice(String content, PollQuestion question) {
         this.content = content;
         this.selected = false;
+        this.question = question;
     }
 }

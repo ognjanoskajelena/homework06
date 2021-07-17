@@ -21,6 +21,9 @@ public class Discussion {
     @ManyToOne
     private Initiative initiative;
 
+    @OneToMany(mappedBy = "discussion", orphanRemoval = true)
+    private List<Comment> comments;
+
     public Discussion() {
     }
 

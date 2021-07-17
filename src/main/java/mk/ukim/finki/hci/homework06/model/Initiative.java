@@ -3,6 +3,7 @@ package mk.ukim.finki.hci.homework06.model;
 import lombok.Data;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 import java.util.List;
 
 @Data
@@ -16,6 +17,8 @@ public class Initiative {
     private String title;
 
     private String description;
+
+    private LocalDate dateOpened;
 
     private Integer participantsCount;
 
@@ -39,9 +42,10 @@ public class Initiative {
     public Initiative() {
     }
 
-    public Initiative(String title, String description, Initiator initiator) {
+    public Initiative(String title, String description, LocalDate dateOpened, Initiator initiator) {
         this.title = title;
         this.description = description;
+        this.dateOpened = dateOpened;
         this.participantsCount = 0;
         this.initiator = initiator;
     }

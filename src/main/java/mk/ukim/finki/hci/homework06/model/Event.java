@@ -4,6 +4,7 @@ import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class Event {
 
     private LocalDate date;
 
-    private LocalDate time;
+    private LocalTime time;
 
     private Integer goingCount;
 
@@ -35,7 +36,7 @@ public class Event {
         this.goingParticipants = new ArrayList<>();
     }
 
-    public Event(String title, String description, LocalDate date, LocalDate time, Initiative initiative) {
+    public Event(String title, String description, LocalDate date, LocalTime time, Initiative initiative) {
         this.title = title;
         this.description = description;
         this.date = date;
