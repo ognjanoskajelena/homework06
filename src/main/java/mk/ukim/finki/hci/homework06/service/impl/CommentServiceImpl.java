@@ -50,11 +50,6 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
-    public Optional<Comment> save(Comment comment) {
-        return Optional.of(this.commentRepository.save(comment));
-    }
-
-    @Override
     public Optional<Comment> deleteById(Long id) {
         Optional<Comment> comment = this.commentRepository.findById(id);
         if(comment.isEmpty())

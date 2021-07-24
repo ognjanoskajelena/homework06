@@ -65,13 +65,14 @@ public class MultipleChoiceQuestionServiceImpl implements MultipleChoiceQuestion
     }
 
     @Override
-    public Optional<PollQuestion> addChoice(Long questionId, Choice choice) {
+    public Optional<MultipleChoiceQuestion> addChoice(Long questionId, Choice choice) {
         Optional<PollQuestion> question = this.multipleChoiceQuestionRepository.findById(questionId);
         if(question.isEmpty())
             throw new PollQuestionNotFoundException(questionId);
 
-        PollQuestion choiceQuestion = question.get();
+        MultipleChoiceQuestion choiceQuestion = (MultipleChoiceQuestion) question.get();
         choiceQuestion.addToChoices(choice);
+        // todo: Check return type
         return Optional.of(this.multipleChoiceQuestionRepository.save(choiceQuestion));
     }
 }

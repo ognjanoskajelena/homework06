@@ -5,8 +5,8 @@ import mk.ukim.finki.hci.homework06.model.Participant;
 import mk.ukim.finki.hci.homework06.model.User;
 import mk.ukim.finki.hci.homework06.model.exception.InitiativeNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.ParticipantNotFoundException;
+import mk.ukim.finki.hci.homework06.repository.InitiativeRepository;
 import mk.ukim.finki.hci.homework06.repository.ParticipantRepository;
-import mk.ukim.finki.hci.homework06.service.InitiativeService;
 import mk.ukim.finki.hci.homework06.service.ParticipantService;
 import org.springframework.stereotype.Service;
 
@@ -16,12 +16,12 @@ import java.util.Optional;
 public class ParticipantServiceImpl implements ParticipantService {
 
     private final ParticipantRepository participantRepository;
-    private final InitiativeService initiativeService;
+    private final InitiativeRepository initiativeRepository;
 
     public ParticipantServiceImpl(ParticipantRepository participantRepository,
-                                  InitiativeService initiativeService) {
+                                  InitiativeRepository initiativeRepository) {
         this.participantRepository = participantRepository;
-        this.initiativeService = initiativeService;
+        this.initiativeRepository = initiativeRepository;
     }
 
     @Override
@@ -36,7 +36,7 @@ public class ParticipantServiceImpl implements ParticipantService {
         if(participant.isEmpty())
             throw new ParticipantNotFoundException(participantId);
 
-        Optional<Initiative> initiative = this.initiativeService.findById(initiativeId);
+        Optional<Initiative> initiative = this.initiativeRepository.findById(initiativeId);
         if(initiative.isEmpty())
             throw new InitiativeNotFoundException(initiativeId);
 

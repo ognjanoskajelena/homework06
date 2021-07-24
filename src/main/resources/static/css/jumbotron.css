@@ -1,0 +1,107 @@
+.db-social .jumbotron {
+    margin: 0;
+    background-size: cover;
+    background: url("../img/protest.png") no-repeat center fixed;
+    color: #fff!important;
+    height: 300px;
+    position: relative;
+    box-shadow: inset 0 0 20px rgba(0, 0, 0, .1);
+}
+
+.db-social .head-profile {
+    margin-top: -120px;
+    border-radius: 4px;
+    position: relative;
+}
+
+.db-social .widget-profile {
+    background: #fff;
+    border-radius: 0;
+    border: none;
+    margin-bottom: 30px;
+}
+.db-social .has-shadow {
+    box-shadow: 0 1px 15px 1px rgba(52, 40, 104, .08);
+}
+.db-social .head-profile:before {
+    content: "";
+    background: rgba(255, 255, 255, .6);
+    height: 20px;
+    width: 90%;
+    position: absolute;
+    top: -20px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 4px 4px 0 0;
+}
+.db-social .head-profile:after {
+    content: "";
+    background: rgba(255, 255, 255, .3);
+    height: 20px;
+    width: 80%;
+    position: absolute;
+    top: -40px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    border-radius: 4px 4px 0 0;
+}
+.db-social .widget-body {
+    padding: 1rem 1.4rem;
+}
+.db-social .image-default img {
+    width: 120px;
+    position: absolute;
+    top: -80px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    box-shadow: 0 0 0 6px rgba(255, 255, 255, 1);
+    z-index: 10;
+}
+.db-social .infos {
+    text-align: center;
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+    line-height: 1.8rem;
+}
+.db-social h2 {
+    color: #2c304d;
+    font-size: 1.6rem;
+    font-weight: 600;
+    margin-bottom: .2rem;
+}
+.db-social .location {
+    margin-top: 3%;
+    color: #aea9c3;
+    font-size: 1rem;
+}
+.db-social .follow .btn {
+    padding: 10px 30px;
+}
+
+.db-social .btn-shadow, .btn-shadow a {
+    color: #5d5386;
+    background-color: #fff;
+    border-color: #fff;
+    box-shadow: 0 1px 15px 1px rgba(52, 40, 104, .15);
+}
+
+.db-social .head-profile li:first-child {
+    padding-left: 0;
+}
+.db-social .head-profile li {
+    display: inline-block;
+    text-align: center;
+    padding: 0 1rem;
+}
+.db-social .head-profile li .counter {
+    color: #2c304d;
+    font-size: 1.4rem;
+    font-weight: 600;
+}
+.db-social .head-profile li .heading {
+    color: #aea9c3;
+    font-size: 1rem;
+}

@@ -14,5 +14,5 @@ public interface SingleChoiceQuestionService {
 
     Optional<PollQuestion> save(String content, Long pollId, List<Long> choicesIds);
 
-    Optional<PollQuestion> addChoice(Long questionId, Choice choice);
+    Optional<SingleChoiceQuestion> addChoice(Long questionId, Choice choice);
 }

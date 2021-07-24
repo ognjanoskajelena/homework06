@@ -9,7 +9,5 @@ public interface CommentService {
 
     Optional<Comment> save(String content, String datePosted, String timePosted, String authorUsername, Long discussionId);
 
-    Optional<Comment> save(Comment comment);
-
     Optional<Comment> deleteById(Long id);
 }

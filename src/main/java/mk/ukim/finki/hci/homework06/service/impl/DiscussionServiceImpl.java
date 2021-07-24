@@ -5,6 +5,7 @@ import mk.ukim.finki.hci.homework06.model.Discussion;
 import mk.ukim.finki.hci.homework06.model.Initiative;
 import mk.ukim.finki.hci.homework06.model.exception.DiscussionNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.InitiativeNotFoundException;
+import mk.ukim.finki.hci.homework06.repository.CommentRepository;
 import mk.ukim.finki.hci.homework06.repository.DiscussionRepository;
 import mk.ukim.finki.hci.homework06.service.CommentService;
 import mk.ukim.finki.hci.homework06.service.DiscussionService;
@@ -19,14 +20,14 @@ public class DiscussionServiceImpl implements DiscussionService {
 
     private final DiscussionRepository discussionRepository;
     private final InitiativeService initiativeService;
-    private final CommentService commentService;
+    private final CommentRepository commentRepository;
 
     public DiscussionServiceImpl(DiscussionRepository discussionRepository,
                                  InitiativeService initiativeService,
-                                 CommentService commentService) {
+                                 CommentRepository commentRepository) {
         this.discussionRepository = discussionRepository;
         this.initiativeService = initiativeService;
-        this.commentService = commentService;
+        this.commentRepository = commentRepository;
     }
 
     @Override
@@ -82,7 +83,7 @@ public class DiscussionServiceImpl implements DiscussionService {
         if(discussion.isEmpty())
             throw new DiscussionNotFoundException(discussionId);
 
-        this.commentService.save(comment);
+        this.commentRepository.save(comment);
         Discussion updatedDiscussion = discussion.get();
         updatedDiscussion.addToComments(comment);
         return Optional.of(this.discussionRepository.save(updatedDiscussion));

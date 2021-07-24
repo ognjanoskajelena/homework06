@@ -14,5 +14,5 @@ public interface MultipleChoiceQuestionService {
 
     Optional<PollQuestion> save(String content, Long pollId, List<Long> choicesIds);
 
-    Optional<PollQuestion> addChoice(Long questionId, Choice choice);
+    Optional<MultipleChoiceQuestion> addChoice(Long questionId, Choice choice);
 }

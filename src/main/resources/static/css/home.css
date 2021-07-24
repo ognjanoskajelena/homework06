@@ -1,0 +1,24 @@
+#about-us .mission-section {
+    margin-left: 0;
+}
+
+#about-us .text-custom {
+    color: #401f3eff;
+    font-size: 3.5vh;
+}
+
+#about-us .links h6 a {
+    color: #401f3eff;
+    text-decoration: none;
+    font-size: 2vh;
+    font-weight: 600;
+}
+
+.section {
+    padding: 70px 0;
+    position: relative;
+}
+
+.gray-bg {
+    background-color: #ebf4fa;
+} /* remove */

@@ -4,7 +4,10 @@ import mk.ukim.finki.hci.homework06.model.*;
 import mk.ukim.finki.hci.homework06.model.exception.InitiativeNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.InitiatorNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.ParticipantNotFoundException;
+import mk.ukim.finki.hci.homework06.repository.DiscussionRepository;
+import mk.ukim.finki.hci.homework06.repository.EventRepository;
 import mk.ukim.finki.hci.homework06.repository.InitiativeRepository;
+import mk.ukim.finki.hci.homework06.repository.PollRepository;
 import mk.ukim.finki.hci.homework06.service.*;
 import org.springframework.stereotype.Service;
 
@@ -16,19 +19,19 @@ public class InitiativeServiceImpl implements InitiativeService {
 
     private final InitiativeRepository initiativeRepository;
     private final InitiatorService initiatorService;
-    private final EventService eventService;
-    private final PollService pollService;
-    private final DiscussionService discussionService;
+    private final EventRepository eventRepository;
+    private final PollRepository pollRepository;
+    private final DiscussionRepository discussionRepository;
     private final ParticipantService participantService;
 
     public InitiativeServiceImpl(InitiativeRepository initiativeRepository, InitiatorService initiatorService,
-                                 EventService eventService, PollService pollService,
-                                 DiscussionService discussionService, ParticipantService participantService) {
+                                 EventRepository eventRepository, PollRepository pollRepository,
+                                 DiscussionRepository discussionRepository, ParticipantService participantService) {
         this.initiativeRepository = initiativeRepository;
         this.initiatorService = initiatorService;
-        this.eventService = eventService;
-        this.pollService = pollService;
-        this.discussionService = discussionService;
+        this.eventRepository = eventRepository;
+        this.pollRepository = pollRepository;
+        this.discussionRepository = discussionRepository;
         this.participantService = participantService;
     }
 
@@ -77,8 +80,7 @@ public class InitiativeServiceImpl implements InitiativeService {
         if(initiative.isEmpty())
             throw new InitiativeNotFoundException(initiativeId);
 
-        this.eventService.save(event.getTitle(), event.getDescription(), event.getDate(), event.getTime(),
-                initiativeId);
+        this.eventRepository.save(event);
         Initiative updatedInitiative = initiative.get();
         updatedInitiative.addToEvents(event);
         return Optional.of(this.initiativeRepository.save(updatedInitiative));
@@ -90,7 +92,7 @@ public class InitiativeServiceImpl implements InitiativeService {
         if(initiative.isEmpty())
             throw new InitiativeNotFoundException(initiativeId);
 
-        this.pollService.save(poll.getTopic(), poll.isOpen(), initiativeId, poll.getQuestions());
+        this.pollRepository.save(poll);
         Initiative updatedInitiative = initiative.get();
         updatedInitiative.addToPolls(poll);
         return Optional.of(this.initiativeRepository.save(updatedInitiative));
@@ -102,7 +104,7 @@ public class InitiativeServiceImpl implements InitiativeService {
         if(initiative.isEmpty())
             throw new InitiativeNotFoundException(initiativeId);
 
-        this.discussionService.save(discussion.getTopic(), discussion.getCloseDate(), initiativeId);
+        this.discussionRepository.save(discussion);
         Initiative updatedInitiative = initiative.get();
         updatedInitiative.addToDiscussions(discussion);
         return Optional.of(this.initiativeRepository.save(updatedInitiative));

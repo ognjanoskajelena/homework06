@@ -68,13 +68,14 @@ public class SingleChoiceQuestionServiceImpl implements SingleChoiceQuestionServ
     }
 
     @Override
-    public Optional<PollQuestion> addChoice(Long questionId, Choice choice) {
+    public Optional<SingleChoiceQuestion> addChoice(Long questionId, Choice choice) {
         Optional<PollQuestion> question = this.singleChoiceQuestionRepository.findById(questionId);
         if(question.isEmpty())
             throw new PollQuestionNotFoundException(questionId);
 
-        PollQuestion choiceQuestion = question.get();
+        SingleChoiceQuestion choiceQuestion = (SingleChoiceQuestion) question.get();
         choiceQuestion.addToChoices(choice);
+        // todo: check return type
         return Optional.of(this.singleChoiceQuestionRepository.save(choiceQuestion));
     }
 }

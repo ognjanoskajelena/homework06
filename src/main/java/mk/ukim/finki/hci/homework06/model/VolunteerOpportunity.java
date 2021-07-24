@@ -3,8 +3,7 @@ package mk.ukim.finki.hci.homework06.model;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -18,6 +17,10 @@ public class VolunteerOpportunity {
 
     private String description;
 
+    private LocalDate datePosted;
+
+    private boolean isActive;
+
     @ManyToOne
     private Administrator administrator;
 
@@ -27,6 +30,16 @@ public class VolunteerOpportunity {
     public VolunteerOpportunity(String topic, String description, Administrator administrator) {
         this.topic = topic;
         this.description = description;
+        this.datePosted = LocalDate.now();
+        this.administrator = administrator;
+        this.isActive = true;
+    }
+
+    public VolunteerOpportunity(String topic, String description, boolean isActive, Administrator administrator) {
+        this.topic = topic;
+        this.description = description;
+        this.datePosted = LocalDate.now();
+        this.isActive = isActive;
         this.administrator = administrator;
     }
 }
