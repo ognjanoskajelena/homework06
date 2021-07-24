@@ -4,6 +4,7 @@ import lombok.Data;
 import mk.ukim.finki.hci.homework06.model.enums.Role;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Data
 @Entity
@@ -25,18 +26,22 @@ public class User {
 
     private String email;
 
+    private LocalDate birthDate;
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
     public User() {
     }
 
-    public User(String name, String surname, String username, String password, String email, Role role) {
+    public User(String name, String surname, String username, String password, String email, LocalDate birthDate,
+                Role role) {
         this.name = name;
         this.surname = surname;
         this.username = username;
         this.password = password;
         this.email = email;
+        this.birthDate = birthDate;
         this.role = role;
     }
 }

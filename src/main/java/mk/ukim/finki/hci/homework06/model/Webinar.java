@@ -29,7 +29,7 @@ public class Webinar {
     private Integer interestedCount;
 
     @ManyToOne
-    private Initiator initiator;
+    private User initiator;
 
     @ManyToMany
     private List<Participant> interestedParticipants;
@@ -39,7 +39,7 @@ public class Webinar {
         this.interestedParticipants = new ArrayList<>();
     }
 
-    public Webinar(String topic, String description, String link, LocalDate date, LocalTime time, Initiator initiator) {
+    public Webinar(String topic, String description, String link, LocalDate date, LocalTime time, User initiator) {
         this.topic = topic;
         this.description = description;
         this.link = link;

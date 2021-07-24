@@ -22,24 +22,24 @@ public class VolunteerOpportunity {
     private boolean isActive;
 
     @ManyToOne
-    private Administrator administrator;
+    private User author;
 
     public VolunteerOpportunity() {
     }
 
-    public VolunteerOpportunity(String topic, String description, Administrator administrator) {
+    public VolunteerOpportunity(String topic, String description, User author) {
         this.topic = topic;
         this.description = description;
         this.datePosted = LocalDate.now();
-        this.administrator = administrator;
+        this.author = author;
         this.isActive = true;
     }
 
-    public VolunteerOpportunity(String topic, String description, boolean isActive, Administrator administrator) {
+    public VolunteerOpportunity(String topic, String description, boolean isActive, User author) {
         this.topic = topic;
         this.description = description;
         this.datePosted = LocalDate.now();
         this.isActive = isActive;
-        this.administrator = administrator;
+        this.author = author;
     }
 }

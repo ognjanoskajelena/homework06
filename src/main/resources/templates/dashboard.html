@@ -9,28 +9,26 @@
                             <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
                                 <ul>
                                     <li>
-                                        <div class="counter">246</div>
-                                        <div class="heading">Friends</div>
+                                        <div class="counter">Initiatives</div>
+                                        <div th:text="${user.getInitiatives().size()}" class="heading"></div>
                                     </li>
                                     <li>
-                                        <div class="counter">30</div>
-                                        <div class="heading">Online</div>
-                                    </li>
-                                    <li>
-                                        <div class="counter">216</div>
-                                        <div class="heading">Offline</div>
+                                        <div class="counter">Events</div>
+                                        <div th:text="${user.getEvents().size()}" class="heading"></div>
                                     </li>
                                 </ul>
                             </div>
                             <div class="col-xl-4 col-md-4 d-flex justify-content-center">
                                 <div class="infos">
-                                    <h2>Welcome back, David Green</h2>
-                                    <div class="location">Las Vegas, Nevada, U.S.</div>
+                                    <h2>Welcome back,
+                                        <th:block th:text="${user.getName() + ' ' + user.getSurname()}"/>
+                                    </h2>
+                                    <div th:text="${user.getEmail()}" class="location"></div>
                                 </div>
                             </div>
                             <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
                                 <div class="follow">
-                                    <a class="btn btn-shadow" href="#"><i class="la la-user-plus"></i>Nekoe kopce</a>
+                                    <a class="btn btn-shadow" href="/logout">Logout</a>
                                 </div>
                             </div>
                         </div>
@@ -120,7 +118,7 @@
         </div>
         <div class="col-md-6">
             <div class="section-title">
-                <h2>Incoming Webinars</h2>
+                <h2>Incoming Events</h2>
                 <p>I design and develop services for customers of all sizes, specializing in creating stylish, modern
                     websites</p>
             </div>

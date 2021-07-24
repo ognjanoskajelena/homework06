@@ -18,3 +18,14 @@ header .text-end .btn-signup {
     background-color: #401f3eff;
     color: white;
 }
+
+header .logout {
+    background: #ec0b43ff;
+    color: white;
+}
+
+header .logout:hover {
+    background: #ee0b44ff;
+    color: white;
+    font-weight: 600;
+}

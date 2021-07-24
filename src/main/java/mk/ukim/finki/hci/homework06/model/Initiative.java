@@ -23,7 +23,7 @@ public class Initiative {
     private Integer participantsCount;
 
     @ManyToOne
-    private Initiator initiator;
+    private User initiator;
 
     @OneToMany(mappedBy = "initiative")
     private List<Event> events;
@@ -40,7 +40,7 @@ public class Initiative {
     public Initiative() {
     }
 
-    public Initiative(String title, String description, LocalDate dateOpened, Initiator initiator) {
+    public Initiative(String title, String description, LocalDate dateOpened, User initiator) {
         this.title = title;
         this.description = description;
         this.dateOpened = dateOpened;

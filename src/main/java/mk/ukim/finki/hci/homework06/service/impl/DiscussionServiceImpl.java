@@ -7,7 +7,6 @@ import mk.ukim.finki.hci.homework06.model.exception.DiscussionNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.InitiativeNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.CommentRepository;
 import mk.ukim.finki.hci.homework06.repository.DiscussionRepository;
-import mk.ukim.finki.hci.homework06.service.CommentService;
 import mk.ukim.finki.hci.homework06.service.DiscussionService;
 import mk.ukim.finki.hci.homework06.service.InitiativeService;
 import org.springframework.stereotype.Service;

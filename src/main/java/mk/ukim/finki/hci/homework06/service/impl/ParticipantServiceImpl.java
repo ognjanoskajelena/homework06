@@ -45,4 +45,20 @@ public class ParticipantServiceImpl implements ParticipantService {
         updatedParticipant.addToInitiatives(initiative.get());
         return Optional.of(this.participantRepository.save(updatedParticipant));
     }
+
+    @Override
+    public Optional<Participant> notParticipate(Long participantId, Long initiativeId) {
+        Optional<Participant> participant = this.findById(participantId);
+        if(participant.isEmpty())
+            throw new ParticipantNotFoundException(participantId);
+
+        Optional<Initiative> initiative = this.initiativeRepository.findById(initiativeId);
+        if(initiative.isEmpty())
+            throw new InitiativeNotFoundException(initiativeId);
+
+        Participant updatedParticipant = participant.get();
+        // todo: Check status
+        updatedParticipant.removeFromInitiatives(initiative.get());
+        return Optional.of(this.participantRepository.save(updatedParticipant));
+    }
 }

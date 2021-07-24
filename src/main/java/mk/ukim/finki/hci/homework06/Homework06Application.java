@@ -7,6 +7,9 @@ import mk.ukim.finki.hci.homework06.repository.*;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 
@@ -19,27 +22,18 @@ public class Homework06Application {
         UserRepository userRepository =
                 configurableApplicationContext.getBean(UserRepository.class);
 
-        UserRepository initiatorRepository =
-                configurableApplicationContext.getBean(InitiatorRepository.class);
-
         UserRepository participantRepository =
                 configurableApplicationContext.getBean(ParticipantRepository.class);
 
-        UserRepository administratorRepository =
-                configurableApplicationContext.getBean(AdministratorRepository.class);
+        User initiator = new User("John", "Doe", "john_doe", "jd", "john.doe@yahoo.com", LocalDate.now(), Role.ROLE_INITIATOR);
 
-        User user = new User("name", "surname", "username", "password", "email", Role.ROLE_PARTICIPANT);
+        User admin = new User("Diana", "Sanchez", "dianna.s", "ds", "diana.s@outlook.com", LocalDate.now(), Role.ROLE_ADMIN);
 
-        User initiator = new Initiator("name", "surname", "username", "password", "email", LocalDate.now(), "123456789");
+        User participant = new Participant("Jelena", "Ognjanoska", "jelena.o", "jo", "j.ognjanoska@yahoo.com", LocalDate.now());
 
-        User participant = new Participant("name", "surname", "username", "password", "email", LocalDate.now());
-
-        User administrator = new Administrator("name", "surname", "username", "password", "email");
-
-        userRepository.save(user);
-        initiatorRepository.save(initiator);
+        userRepository.save(initiator);
+        userRepository.save(admin);
         participantRepository.save(participant);
-        administratorRepository.save(administrator);
 
         PollQuestionRepository pollQuestionRepo =
                 configurableApplicationContext.getBean(PollQuestionRepository.class);
@@ -66,4 +60,10 @@ public class Homework06Application {
         singleChoiceQuestionRepo.save(singleChoiceQuestion);
         multipleChoiceQuestionRepo.save(multipleChoiceQuestion);
     }
+
+    @Bean
+    PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder(10);
+    }
+
 }

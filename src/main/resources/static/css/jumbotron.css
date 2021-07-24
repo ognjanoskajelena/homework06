@@ -62,7 +62,7 @@
 }
 .db-social .infos {
     text-align: center;
-    margin-top: 4rem;
+    margin-top: 2.5rem;
     margin-bottom: 1rem;
     line-height: 1.8rem;
 }
@@ -78,7 +78,7 @@
     font-size: 1rem;
 }
 .db-social .follow .btn {
-    padding: 10px 30px;
+    padding: 6px 20px;
 }
 
 .db-social .btn-shadow, .btn-shadow a {
@@ -98,7 +98,7 @@
 }
 .db-social .head-profile li .counter {
     color: #2c304d;
-    font-size: 1.4rem;
+    font-size: 1.2rem;
     font-weight: 600;
 }
 .db-social .head-profile li .heading {

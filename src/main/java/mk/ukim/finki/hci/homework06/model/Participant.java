@@ -3,6 +3,7 @@ package mk.ukim.finki.hci.homework06.model;
 import lombok.Data;
 import mk.ukim.finki.hci.homework06.model.enums.Role;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import java.time.LocalDate;
@@ -13,12 +14,11 @@ import java.util.List;
 @Entity
 public class Participant extends User {
 
-    private LocalDate birthDate;
 
-    /*
     @ManyToMany(mappedBy = "goingParticipants", cascade = CascadeType.REMOVE)
     private List<Event> events;
 
+    /*
     @ManyToMany(mappedBy = "interestedParticipants", cascade = CascadeType.REMOVE)
     private List<Webinar> webinars;
     */
@@ -29,23 +29,28 @@ public class Participant extends User {
     public Participant() {
         super();
         this.initiatives = new ArrayList<>();
+        this.events = new ArrayList<>();
     }
 
     public Participant(String name, String surname, String username, String password, String email,
                        LocalDate birthDate, List<Initiative> initiatives) {
-        super(name, surname, username, password, email, Role.ROLE_PARTICIPANT);
-        this.birthDate = birthDate;
+        super(name, surname, username, password, email, birthDate, Role.ROLE_PARTICIPANT);
         this.initiatives = initiatives;
+        this.events = new ArrayList<>();
     }
 
     public Participant(String name, String surname, String username, String password, String email,
                        LocalDate birthDate) {
-        super(name, surname, username, password, email, Role.ROLE_PARTICIPANT);
-        this.birthDate = birthDate;
+        super(name, surname, username, password, email, birthDate, Role.ROLE_PARTICIPANT);
         this.initiatives = new ArrayList<>();
+        this.events = new ArrayList<>();
     }
 
     public void addToInitiatives(Initiative initiative) {
         this.initiatives.add(initiative);
+    }
+
+    public void removeFromInitiatives(Initiative initiative) {
+        this.initiatives.remove(initiative);
     }
 }

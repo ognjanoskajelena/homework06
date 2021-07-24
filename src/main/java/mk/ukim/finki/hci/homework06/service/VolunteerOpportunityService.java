@@ -7,7 +7,7 @@ import java.util.Optional;
 public interface VolunteerOpportunityService {
     Optional<VolunteerOpportunity> findById(Long id);
 
-    Optional<VolunteerOpportunity> save(String topic, String description, Long administratorId);
+    Optional<VolunteerOpportunity> save(String topic, String description, Long authorId);
 
     Optional<VolunteerOpportunity> update(Long id, String topic, String description);
 

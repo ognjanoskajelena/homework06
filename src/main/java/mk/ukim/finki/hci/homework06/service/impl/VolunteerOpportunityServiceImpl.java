@@ -1,11 +1,11 @@
 package mk.ukim.finki.hci.homework06.service.impl;
 
-import mk.ukim.finki.hci.homework06.model.Administrator;
+import mk.ukim.finki.hci.homework06.model.User;
 import mk.ukim.finki.hci.homework06.model.VolunteerOpportunity;
 import mk.ukim.finki.hci.homework06.model.exception.AdministratorNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.VolunteerOpportunityNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.VolunteerOpportunityRepository;
-import mk.ukim.finki.hci.homework06.service.AdministratorService;
+import mk.ukim.finki.hci.homework06.service.UserService;
 import mk.ukim.finki.hci.homework06.service.VolunteerOpportunityService;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +15,12 @@ import java.util.Optional;
 public class VolunteerOpportunityServiceImpl implements VolunteerOpportunityService {
 
     private final VolunteerOpportunityRepository volunteerOpportunityRepository;
-    private final AdministratorService administratorService;
+    private final UserService userService;
 
     public VolunteerOpportunityServiceImpl(VolunteerOpportunityRepository volunteerOpportunityRepository,
-                                           AdministratorService administratorService) {
+                                           UserService userService) {
         this.volunteerOpportunityRepository = volunteerOpportunityRepository;
-        this.administratorService = administratorService;
+        this.userService = userService;
     }
 
     @Override
@@ -30,7 +30,7 @@ public class VolunteerOpportunityServiceImpl implements VolunteerOpportunityServ
 
     @Override
     public Optional<VolunteerOpportunity> save(String topic, String description, Long administratorId) {
-        Optional<Administrator> administrator = this.administratorService.findById(administratorId);
+        Optional<User> administrator = this.userService.findById(administratorId);
         if(administrator.isEmpty())
             throw new AdministratorNotFoundException(administratorId);
 

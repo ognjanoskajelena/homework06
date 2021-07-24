@@ -1,14 +1,14 @@
 package mk.ukim.finki.hci.homework06.service.impl;
 
-import mk.ukim.finki.hci.homework06.model.Initiator;
 import mk.ukim.finki.hci.homework06.model.Participant;
+import mk.ukim.finki.hci.homework06.model.User;
 import mk.ukim.finki.hci.homework06.model.Webinar;
 import mk.ukim.finki.hci.homework06.model.exception.InitiatorNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.ParticipantNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.WebinarNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.WebinarRepository;
-import mk.ukim.finki.hci.homework06.service.InitiatorService;
 import mk.ukim.finki.hci.homework06.service.ParticipantService;
+import mk.ukim.finki.hci.homework06.service.UserService;
 import mk.ukim.finki.hci.homework06.service.WebinarService;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +20,14 @@ import java.util.Optional;
 public class WebinarServiceImpl implements WebinarService {
 
     private final WebinarRepository webinarRepository;
-    private final InitiatorService initiatorService;
+    private final UserService userService;
     private final ParticipantService participantService;
 
     public WebinarServiceImpl(WebinarRepository webinarRepository,
-                              InitiatorService initiatorService,
+                              UserService userService,
                               ParticipantService participantService) {
         this.webinarRepository = webinarRepository;
-        this.initiatorService = initiatorService;
+        this.userService = userService;
         this.participantService = participantService;
     }
 
@@ -38,7 +38,7 @@ public class WebinarServiceImpl implements WebinarService {
 
     @Override
     public Optional<Webinar> save(String topic, String description, String link, String date, String time, Long initiatorId) {
-        Optional<Initiator> initiator = this.initiatorService.findById(initiatorId);
+        Optional<User> initiator = this.userService.findById(initiatorId);
         if(initiator.isPresent()) {
             Webinar webinar = new Webinar(topic, description, link, LocalDate.parse(date), LocalTime.parse(time),
                     initiator.get());

@@ -18,17 +18,17 @@ import java.util.Optional;
 public class InitiativeServiceImpl implements InitiativeService {
 
     private final InitiativeRepository initiativeRepository;
-    private final InitiatorService initiatorService;
+    private final UserService userService;
     private final EventRepository eventRepository;
     private final PollRepository pollRepository;
     private final DiscussionRepository discussionRepository;
     private final ParticipantService participantService;
 
-    public InitiativeServiceImpl(InitiativeRepository initiativeRepository, InitiatorService initiatorService,
+    public InitiativeServiceImpl(InitiativeRepository initiativeRepository, UserService userService,
                                  EventRepository eventRepository, PollRepository pollRepository,
                                  DiscussionRepository discussionRepository, ParticipantService participantService) {
         this.initiativeRepository = initiativeRepository;
-        this.initiatorService = initiatorService;
+        this.userService = userService;
         this.eventRepository = eventRepository;
         this.pollRepository = pollRepository;
         this.discussionRepository = discussionRepository;
@@ -42,7 +42,7 @@ public class InitiativeServiceImpl implements InitiativeService {
 
     @Override
     public Optional<Initiative> save(String title, String description, String dateOpened, Long initiatorId) {
-        Optional<Initiator> initiator = this.initiatorService.findById(initiatorId);
+        Optional<User> initiator = this.userService.findById(initiatorId);
         if(initiator.isEmpty())
             throw new InitiatorNotFoundException(initiatorId);
 
