@@ -13,6 +13,8 @@ public interface EventService {
 
     Optional<Event> save(String title, String description, LocalDate date, LocalTime time, Long initiativeId);
 
+    Optional<Event> save(Event event);
+
     Optional<Event> update(Long id, String title, String description, String date, String time);
 
     Optional<Event> deleteById(Long id);

@@ -13,6 +13,8 @@ public interface DiscussionService {
 
     Optional<Discussion> save(String topic, LocalDate closeDate, Long initiativeId);
 
+    Optional<Discussion> save(Discussion discussion);
+
     Optional<Discussion> update(Long id, String topic, String closeDate);
 
     Optional<Discussion> deleteById(Long id);

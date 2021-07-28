@@ -8,5 +8,7 @@ import java.util.Optional;
 public interface OpenQuestionService {
     Optional<OpenQuestion> findById(Long id);
 
-    Optional<PollQuestion> save(String content, Long pollId, String response);
+    Optional<PollQuestion> save(String content, Long pollId);
+
+    Optional<OpenQuestion> respond(Long questionId, String response);
 }

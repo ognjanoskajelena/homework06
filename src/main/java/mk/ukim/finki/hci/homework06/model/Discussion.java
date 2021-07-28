@@ -1,5 +1,6 @@
 package mk.ukim.finki.hci.homework06.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -18,6 +19,10 @@ public class Discussion {
 
     private LocalDate closeDate;
 
+    @Transient
+    private boolean isOpen;
+
+    @JsonIgnore
     @ManyToOne
     private Initiative initiative;
 
@@ -25,15 +30,21 @@ public class Discussion {
     private List<Comment> comments;
 
     public Discussion() {
+        this.isOpen = true;
     }
 
     public Discussion(String topic, LocalDate closeDate, Initiative initiative) {
         this.topic = topic;
         this.closeDate = closeDate;
+        this.isOpen = true;
         this.initiative = initiative;
     }
 
     public void addToComments(Comment comment) {
         this.comments.add(comment);
+    }
+
+    public void close() {
+        this.isOpen = false;
     }
 }

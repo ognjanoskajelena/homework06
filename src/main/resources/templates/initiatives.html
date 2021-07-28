@@ -1,4 +1,4 @@
-<div class="container db-social">
+<div class="container" id="jumbotron-header">
     <div class="jumbotron jumbotron-fluid"></div>
     <div class="container-fluid p-5">
         <div class="row justify-content-center">
@@ -20,110 +20,23 @@
     </div>
 </div>
 
-<div class="container mt-2 mb-5">
+<div th:if="${initiatives.size() > 0}" class="container mt-2 mb-5 pb-4">
     <div class="row">
 
-        <div class="col-md-4">
-            <div class="feature-box-1">
-                <div class="icon">
+        <div th:each="i : ${initiatives}" class="col-md-6">
+            <div class="initiative-box mb-3">
+                <div th:title="${i.getInitiator().getUsername()}" class="icon">
                     <i class="fa fa-user"></i>
                 </div>
-                <div class="feature-content">
-                    <h5>Different Layout</h5>
-                    <p>I design and develop services for customers of all sizes, specializing in creating
-                        stylish, modern websites.</p>
-                    <span class="text-small mt-3">No. of participants | 128</span>
-                    <div class="text-end"><button class="btn btn-light">Read more</button></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="feature-box-1">
-                <div class="icon">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="feature-content">
-                    <h5>Different Layout</h5>
-                    <p>I design and develop services for customers of all sizes, specializing in creating
-                        stylish, modern websites.</p>
-                    <span class="text-small mt-3">No. of participants | 128</span>
-                    <div class="text-end"><button class="btn btn-light">Read more</button></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="feature-box-1">
-                <div class="icon">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="feature-content">
-                    <h5>Different Layout</h5>
-                    <p>I design and develop services for customers of all sizes, specializing in creating
-                        stylish, modern websites.</p>
-                    <span class="text-small mt-3">No. of participants | 128</span>
-                    <div class="text-end"><button class="btn btn-light">Read more</button></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="feature-box-1">
-                <div class="icon">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="feature-content">
-                    <h5>Different Layout</h5>
-                    <p>I design and develop services for customers of all sizes, specializing in creating
-                        stylish, modern websites.</p>
-                    <span class="text-small mt-3">No. of participants | 128</span>
-                    <div class="text-end"><button class="btn btn-light">Read more</button></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="feature-box-1">
-                <div class="icon">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="feature-content">
-                    <h5>Different Layout</h5>
-                    <p>I design and develop services for customers of all sizes, specializing in creating
-                        stylish, modern websites.</p>
-                    <span class="text-small mt-3">No. of participants | 128</span>
-                    <div class="text-end"><button class="btn btn-light">Read more</button></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="feature-box-1">
-                <div class="icon">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="feature-content">
-                    <h5>Different Layout</h5>
-                    <p>I design and develop services for customers of all sizes, specializing in creating
-                        stylish, modern websites.</p>
-                    <span class="text-small mt-3">No. of participants | 128</span>
-                    <div class="text-end"><button class="btn btn-light">Read more</button></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="feature-box-1">
-                <div class="icon">
-                    <i class="fa fa-user"></i>
-                </div>
-                <div class="feature-content">
-                    <h5>Different Layout</h5>
-                    <p>I design and develop services for customers of all sizes, specializing in creating
-                        stylish, modern websites.</p>
-                    <span class="text-small mt-3">No. of participants | 128</span>
-                    <div class="text-end"><button class="btn btn-light">Read more</button></div>
+                <div class="initiative-content">
+                    <h5 th:text="${i.getTitle()}" class="fw-bold pb-2"></h5>
+                    <p th:text="${i.getDescription()}"></p>
+                    <span class="mt-3">
+                        Number of participants: <b><th:block th:text="${i.getParticipants().size()}"/></b>
+                    </span>
+                    <div class="text-end">
+                        <a th:href="@{'/initiatives/{id}' (id=${i.getId()})}" class="btn btn-light">More</a>
+                    </div>
                 </div>
             </div>
         </div>

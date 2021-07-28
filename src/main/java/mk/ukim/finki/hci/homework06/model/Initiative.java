@@ -1,9 +1,11 @@
 package mk.ukim.finki.hci.homework06.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 @Data
@@ -16,11 +18,10 @@ public class Initiative {
 
     private String title;
 
+    @Column(length = 1024)
     private String description;
 
     private LocalDate dateOpened;
-
-    private Integer participantsCount;
 
     @ManyToOne
     private User initiator;
@@ -38,14 +39,21 @@ public class Initiative {
     private List<Participant> participants;
 
     public Initiative() {
+        this.events = new ArrayList<>();
+        this.polls = new ArrayList<>();
+        this.discussions = new ArrayList<>();
+        this.participants = new ArrayList<>();
     }
 
-    public Initiative(String title, String description, LocalDate dateOpened, User initiator) {
+    public Initiative(String title, String description, User initiator) {
         this.title = title;
         this.description = description;
-        this.dateOpened = dateOpened;
-        this.participantsCount = 0;
+        this.dateOpened = LocalDate.now();
         this.initiator = initiator;
+        this.events = new ArrayList<>();
+        this.polls = new ArrayList<>();
+        this.discussions = new ArrayList<>();
+        this.participants = new ArrayList<>();
     }
 
     public void addToEvents(Event event) {
@@ -58,15 +66,5 @@ public class Initiative {
 
     public void addToDiscussions(Discussion discussion) {
         this.discussions.add(discussion);
-    }
-
-    public void addToParticipants(Participant participant) {
-        this.participantsCount += 1;
-        this.participants.add(participant);
-    }
-
-    public void removeFromParticipants(Participant participant) {
-        this.participantsCount -= 1;
-        this.participants.add(participant);
     }
 }

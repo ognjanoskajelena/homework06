@@ -18,6 +18,7 @@ public class Webinar {
 
     private String topic;
 
+    @Column(length = 1024)
     private String description;
 
     private String link;

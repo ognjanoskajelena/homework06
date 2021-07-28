@@ -55,6 +55,11 @@ public class DiscussionServiceImpl implements DiscussionService {
     }
 
     @Override
+    public Optional<Discussion> save(Discussion discussion) {
+        return Optional.of(this.discussionRepository.save(discussion));
+    }
+
+    @Override
     public Optional<Discussion> update(Long id, String topic, String closeDate) {
         Optional<Discussion> discussion = this.findById(id);
         if(discussion.isEmpty())

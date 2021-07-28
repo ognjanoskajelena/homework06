@@ -2,23 +2,22 @@
     margin-left: 0;
 }
 
-#about-us .text-custom {
-    color: #401f3eff;
-    font-size: 3.5vh;
+#about-us .custom-heading {
+    color: #0d1821ff;
+    font-size: 4vh;
+}
+
+#about-us .mission-section .custom-sub-heading {
+    color: #344966ff;
+    font-weight: 700;
 }
 
 #about-us .links h6 a {
-    color: #401f3eff;
+    color: #0d1821ff;
     text-decoration: none;
-    font-size: 2vh;
-    font-weight: 600;
+    font-size: 2.2vh;
 }
 
-.section {
-    padding: 70px 0;
-    position: relative;
+#about-us .links h6 a:hover {
+    color: #b4cded;
 }
-
-.gray-bg {
-    background-color: #ebf4fa;
-} /* remove */

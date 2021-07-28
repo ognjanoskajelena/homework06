@@ -1,5 +1,6 @@
 package mk.ukim.finki.hci.homework06.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Comment {
     @ManyToOne
     private User author;
 
+    @JsonIgnore
     @ManyToOne
     private Discussion discussion;
 

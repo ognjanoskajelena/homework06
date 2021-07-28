@@ -1,5 +1,6 @@
 package mk.ukim.finki.hci.homework06.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -16,6 +17,7 @@ public class Choice {
 
     private boolean selected;
 
+    @JsonIgnore
     @ManyToOne
     private PollQuestion question;
 

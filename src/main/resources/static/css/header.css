@@ -1,31 +1,32 @@
 header .nav-link {
-    color: #401f3eff;
+    color: #0d1821ff;
     font-size: 2.25vh;
     font-weight: 250;
 }
 
 header .nav-link:hover {
-    color: #8A4285;
-    transform: scale(1.1);
+    color: #344966ff;
+    transform: scale(1.05);
     font-weight: bold;
 }
 
 header .nav-link:active {
-    color: #8A4285;
+    color: #344966ff;
 }
 
 header .text-end .btn-signup {
-    background-color: #401f3eff;
+    background-color: #344966ff;
     color: white;
 }
 
 header .logout {
-    background: #ec0b43ff;
+    background: #344966ff;
     color: white;
 }
 
 header .logout:hover {
-    background: #ee0b44ff;
-    color: white;
+    background: white;
+    color: #0d1821ff;
+    border: 1px solid #344966ff;
     font-weight: 600;
 }

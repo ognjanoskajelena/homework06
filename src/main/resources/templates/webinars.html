@@ -1,3 +1,57 @@
-<div class="container text-center my-5 py-5">
-  <h1 class="my-5 py-5 display-1 text-secondary">SAMPLE INFO</h1>
+<div class="container" id="jumbotron-header">
+    <div class="jumbotron jumbotron-fluid"></div>
+    <div class="container-fluid p-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-11">
+                <div class="widget-profile head-profile has-shadow">
+                    <div class="widget-body pb-0">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-xl-4 col-md-4 m-auto">
+                                <div class="infos">
+                                    <h2>Incoming webinars</h2>
+                                    <div class="location">Read more about scheduled incoming webinars</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mb-5" id="webinars">
+    <div class="row">
+        <div class="col-md-12" th:each="w : ${webinars}">
+            <div class="webinar-box mb-4">
+                <span class="d-block text-small">
+                    <i class="fa fa-link"></i>
+                    &nbsp;<a th:href="${w.getLink()}"><th:block th:text="${w.getLink()}"/></a>
+                </span>
+                <span class="d-block text-small">
+                    <i class="fa fa-table"></i>
+                    &nbsp;<th:block
+                        th:text="${w.getDate().getMonth() + ' ' + w.getDate().getDayOfMonth() + ', ' + w.getDate().getYear()}"/>
+                </span>
+                <span class="d-block text-small mb-3">
+                    <i class="fa fa-clock-o"></i>
+                    &nbsp;<th:block th:text="${w.getTime()}"/>
+                </span>
+                <div class="box-content">
+                    <h5 class="mb-3">
+                        <th:block th:text="${w.getTopic()}"/>
+                    </h5>
+                    <p>
+                        <th:block th:text="${w.getDescription()}"/>
+                    </p>
+                    <div class="text-end">
+                        <span class="d-block text-small">
+                            <i class="fa fa-user"></i>
+                            &nbsp;<th:block th:text="${w.getInitiator().getUsername()}"/>
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

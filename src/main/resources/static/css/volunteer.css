@@ -1,8 +1,6 @@
-.feature-box-1 {
-    padding: 25px;
+#volunteer-opportunities .opportunity-box {
+    padding: 20px;
     box-shadow: 0 0 6px rgba(31, 45, 61, 0.1);
-    border-radius: 8px;
-    margin: 15px 0;
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -13,23 +11,23 @@
     top: 0;
 }
 
-.feature-box-1 * {
+#volunteer-opportunities .opportunity-box * {
     -moz-transition: ease all 0.5s;
     -o-transition: ease all 0.5s;
     -webkit-transition: ease all 0.5s;
     transition: ease all 0.5s;
 }
 
-.feature-box-1 .feature-content h4 {
-    color: black;
-    font-weight: 500;
+#volunteer-opportunities .opportunity-box .box-content h4 {
+    color: #0d1821ff;
+    font-weight: 600;
 }
 
-.feature-box-1 .feature-content p {
-    color: black;
+#volunteer-opportunities .opportunity-box .box-content p {
+    color: #0d1821ff;
 }
 
-.feature-box-1:after {
+#volunteer-opportunities .opportunity-box:after {
     content: "";
     position: absolute;
     top: 0;
@@ -37,7 +35,7 @@
     left: auto;
     right: 0;
     width: 0;
-    background: rgba(64, 31, 62, 1);
+    background: #f0f4efff;
     z-index: -1;
     -moz-transition: ease all 1s;
     -o-transition: ease all 1s;
@@ -45,21 +43,23 @@
     transition: ease all 1s;
 }
 
-.feature-box-1:hover {
+#volunteer-opportunities .opportunity-box:hover {
     top: -2px;
 }
 
-.feature-box-1:hover .feature-content h4, span {
-    color: #ffffff;
-}
-
-.feature-box-1:hover .feature-content p {
-    color: #ffffff;
-}
-
-.feature-box-1:hover:after {
+#volunteer-opportunities .opportunity-box:hover:after {
     width: 100%;
     height: 100%;
     left: 0;
     right: auto;
+}
+
+#volunteer-opportunities .opportunity-box:hover .btn {
+    background: #c6d19fff;
+    border-color: #BDCA91;
+    box-shadow: 0 0 6px rgba(31, 45, 61, 0.1);
+}
+
+#volunteer-opportunities .opportunity-box .btn:hover {
+    background: #B4C383;
 }

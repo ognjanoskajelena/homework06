@@ -1,0 +1,508 @@
+<div class="container" id="jumbotron-header">
+    <div class="jumbotron jumbotron-fluid"></div>
+    <div class="container-fluid p-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-11">
+                <div class="widget-profile head-profile has-shadow">
+                    <div class="widget-body pb-0">
+                        <div class="row d-flex align-items-center">
+                            <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
+                                <ul>
+                                    <li>
+                                        <div th:text="${initiative.getParticipants().size()}" class="counter"></div>
+                                        <div class="heading">Number of participants</div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="col-xl-4 col-md-4 d-flex justify-content-center">
+                                <div class="infos">
+                                    <h2>
+                                        <th:block th:text="${initiative.getTitle()}"/>
+                                    </h2>
+                                    <div class="location">
+                                        Open date |
+                                        <b>
+                                            <th:block
+                                                    th:text="${initiative.getDateOpened().getMonth() + ' ' + initiative.getDateOpened().getDayOfMonth() + ', ' + initiative.getDateOpened().getYear()}"/>
+                                        </b>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center px-5">
+                                <div class="follow">
+                                    <a title="Receive notifications"
+                                       th:href="@{'/initiatives/{id}/take-part' (id=${initiative.getId()})}"
+                                       class="bell">
+                                        <i class="fa fa-bell"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container pb-5 mb-5" id="initiative-details">
+    <ul class="nav nav-tabs nav-justified" id="myTab" role="tablist">
+        <li class="nav-item tab-item-btn" role="presentation">
+            <button class="nav-link active" id="details-tab" data-bs-toggle="tab" data-bs-target="#details"
+                    type="button"
+                    role="tab" aria-controls="details" aria-selected="true">DETAILS
+            </button>
+        </li>
+        <li class="nav-item tab-item-btn" role="presentation">
+            <button class="nav-link" id="polls-tab" data-bs-toggle="tab" data-bs-target="#polls" type="button"
+                    role="tab" aria-controls="polls" aria-selected="false">POLLS
+            </button>
+        </li>
+        <li class="nav-item tab-item-btn" role="presentation">
+            <button class="nav-link" id="discussions-tab" data-bs-toggle="tab" data-bs-target="#discussions"
+                    type="button"
+                    role="tab" aria-controls="discussions" aria-selected="false">DISCUSSIONS
+            </button>
+        </li>
+        <li class="nav-item tab-item-btn" role="presentation">
+            <button class="nav-link" id="events-tab" data-bs-toggle="tab" data-bs-target="#events" type="button"
+                    role="tab" aria-controls="events" aria-selected="false">EVENTS
+            </button>
+        </li>
+    </ul>
+    <div class="tab-content pt-5" id="myTabContent">
+        <div class="tab-pane fade show active" id="details" role="tabpanel" aria-labelledby="details-tab">
+            <div class="row">
+                <div class="col-12">
+                    <p class="p-3 fs-5">
+                        <th:block
+                                th:text="${initiative.getDescription()}"/>
+                    </p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="py-1 px-3 fs-5 text-end initiator-paragraph">
+                        Initiator |
+                        <b>
+                            <th:block
+                                    th:text="${initiative.getInitiator().getName() + ' ' + initiative.getInitiator().getSurname()}"/>
+                        </b>
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="polls" role="tabpanel" aria-labelledby="polls-tab">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="py-4 px-2 fs-4 fw-bold">RECENT POLLS</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="polls-list" class="list-group">
+                                <a class="list-group-item list-group-item-action"
+                                   th:each="poll : ${initiative.getPolls()}"
+                                   th:if="${!poll.isOpen()}"
+                                   th:href="@{'#list-item-{statVar}' (statVar=${pollStat.index})}"
+                                   th:text="${poll.getTopic()}"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="position: relative; overflow-y: scroll; height: 430px;">
+                            <div data-bs-spy="scroll" data-bs-target="#polls-list" data-bs-offset="0"
+                                 class="scrollspy-example" tabindex="0">
+                                <div class="card text-dark bg-light mb-0 rounded-0" style="max-width: 18rem;"
+                                     th:each="poll : ${initiative.getPolls()}"
+                                     th:if="${!poll.isOpen()}">
+                                    <div class="card-body">
+                                        <div class="card-title fs-5"
+                                             th:id="@{'list-item-{statVar}' (statVar=${pollStat.index})}"
+                                             th:text="${poll.getTopic()}"></div>
+                                        <p class="card-text text-secondary">Status: <span class="text-danger fw-bold">closed</span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 px-2">
+                    <div class="pt-4 pb-4 px-4" id="active-poll"
+                         th:each="p : ${initiative.getPolls()}"
+                         th:if="${p.isOpen()}">
+                        <div class="text-start">
+                            <h4 class="pb-3 px-2 fw-bold">
+                                <th:block th:text="${p.getTopic()}"/>
+                            </h4>
+                        </div>
+                        <div class="text-end">
+                            <p class="px-2 fs-6 text-muted">
+                                Status: <b>OPEN</b>
+                            </p>
+                        </div>
+                        <ol>
+                            <li th:each="q : ${p.getQuestions()}"
+                                class="question pb-1">
+                                <div th:switch="${q.getType().name()}">
+                                    <div th:case="'OPEN'" class="py-2">
+                                        <h6>
+                                            <th:block th:text="${q.getContent()}"/>
+                                        </h6>
+                                        <textarea class="w-100 textarea-response"
+                                                  placeholder="Write your response here..."
+                                                  th:id="${q.getId()}"></textarea>
+                                    </div>
+                                    <div th:case="'SINGLE'" class="py-2">
+                                        <h6>
+                                            <th:block th:text="${q.getContent()}"/>
+                                        </h6>
+                                        <th:block>
+                                            <div th:each="c : ${q.getChoices()}">
+                                                <input type="radio" th:value="${c.getId()}" name="radio"
+                                                       class="radio-poll"/>&nbsp;
+                                                <span><th:block th:text="${c.getContent()}"/></span>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                    <div th:case="'MULTIPLE'" class="py-2">
+                                        <h6>
+                                            <th:block th:text="${q.getContent()}"/>
+                                        </h6>
+                                        <th:block>
+                                            <div th:each="c : ${q.getChoices()}">
+                                                <input type="checkbox" th:value="${c.getId()}"
+                                                       class="checkbox-poll"/>&nbsp;
+                                                <span><th:block th:text="${c.getContent()}"/></span>
+                                            </div>
+                                        </th:block>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                        <div class="text-center">
+                            <button type="button" class="btn btn-dark text-light px-4" data-bs-toggle="modal"
+                                    data-bs-target="#confirmModal">
+                                SEND
+                            </button>
+                            <div class="modal fade" id="confirmModal" tabindex="-1"
+                                 aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-dialog-centered">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title fw-bold">Confirm sending</h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                                    aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body fs-4">
+                                            Are you sure ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary float-start"
+                                                    data-bs-dismiss="modal">
+                                                Close
+                                            </button>
+                                            <button type="button" class="btn btn-primary" id="btn-yes"
+                                                    data-bs-dismiss="modal">Yes
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="feedback" class="h-100 p-3 text-center">
+                        <h3 class="d-inline-block align-middle text-muted">Thank you! No more active polls.</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="discussions" role="tabpanel" aria-labelledby="discussions-tab">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="py-4 px-2 fs-4 fw-bold">RECENT DISCUSSIONS</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="discussions-list" class="list-group">
+                                <a class="list-group-item list-group-item-action"
+                                   th:each="d : ${initiative.getDiscussions()}"
+                                   th:if="${!d.isOpen()}"
+                                   th:href="@{'#list-diss-{statVar}' (statVar=${dStat.index})}"
+                                   th:text="${d.getTopic()}"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="position: relative; overflow-y: scroll; height: 185px;">
+                            <div data-bs-spy="scroll" data-bs-target="#discussions-list" data-bs-offset="0"
+                                 class="scrollspy-example" tabindex="0">
+                                <div class="card text-dark bg-light mb-0 rounded-0" style="max-width: 18rem;"
+                                     th:each="d : ${initiative.getDiscussions()}"
+                                     th:if="${!d.isOpen()}">
+                                    <div class="card-body">
+                                        <div class="card-title fs-5"
+                                             th:id="@{'list-diss-{statVar}' (statVar=${dStat.index})}"
+                                             th:text="${d.getTopic()}"></div>
+                                        <p class="card-text text-secondary">Closed on: <span class="text-danger fw-bold"
+                                                                                             th:text="${d.getCloseDate().getMonth() + ' ' + d.getCloseDate().getDayOfMonth() + ', ' + d.getCloseDate.getYear()}"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 px-2">
+                    <div class="pt-4 pb-1 px-2" id="active-discussion"
+                         th:each="diss : ${initiative.getDiscussions()}"
+                         th:if="${diss.isOpen()}">
+                        <div class="text-center">
+                            <h4 class="pb-3 px-2 fs-4 fw-bold">
+                                <th:block th:text="${diss.getTopic()}"/>
+                            </h4>
+                        </div>
+                        <div class="all-comments">
+                            <div th:each="c : ${diss.getComments()}" class="card mb-2">
+                                <div class="card-header bg-secondary text-light">
+                                    <i class="fa fa-user"></i>&nbsp;
+                                    <th:block th:text="${c.getAuthor().getUsername()}"/>
+                                </div>
+                                <div class="card-body bg-light">
+                                    <p class="card-text">
+                                        <th:block th:text="${c.getContent()}"/>
+                                    </p>
+                                    <div class="text-end">
+                                        <small class="text-muted">
+                                            <th:block
+                                                    th:text="${c.getDatePosted().getDayOfMonth() > 9} ? ${c.getDatePosted().getDayOfMonth()} : '0' + ${c.getDatePosted().getDayOfMonth()}"/>
+                                            /
+                                            <th:block
+                                                    th:text="${c.getDatePosted().getMonthValue() > 9} ? ${c.getDatePosted().getMonthValue()} : '0' + ${c.getDatePosted().getMonthValue()}"/>
+                                            /
+                                            <th:block
+                                                    th:text="${c.getDatePosted().getYear()} + ' ' + ${c.getTimePosted()}"/>
+                                        </small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row pt-3">
+                            <div class="col-9">
+                                <textarea class="w-100" id="textarea-comment" th:discussion="${diss.getId()}"
+                                          placeholder="Enter your comment here..." required></textarea>
+                            </div>
+                            <div class="col-3 text-center">
+                                <button th:user="${user.getUsername()}" type="submit" id="btn-post"
+                                        class="btn btn-dark text-light px-3">
+                                    POST
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="tab-pane fade" id="events" role="tabpanel" aria-labelledby="events-tab">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="row">
+                        <div class="col-12">
+                            <h5 class="py-4 px-2 fs-4 fw-bold">RECENT EVENTS</h5>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div id="events-list" class="list-group">
+                                <a class="list-group-item list-group-item-action"
+                                   th:each="e : ${initiative.getEvents()}"
+                                   th:if="${e.isClosed()}"
+                                   th:href="@{'#list-event-{statVar}' (statVar=${eStat.index})}"
+                                   th:text="${e.getTitle()}"></a>
+                            </div>
+                        </div>
+                        <div class="col-md-6" style="position: relative; overflow-y: scroll; height: 240px;">
+                            <div data-bs-spy="scroll" data-bs-target="#events-list" data-bs-offset="0"
+                                 class="scrollspy-example" tabindex="0">
+                                <div class="card text-dark bg-light mb-0 rounded-0" style="max-width: 18rem;"
+                                     th:each="e : ${initiative.getEvents()}"
+                                     th:if="${e.isClosed()}">
+                                    <div class="card-body">
+                                        <div class="card-title fs-5"
+                                             th:id="@{'list-event-{statVar}' (statVar=${eStat.index})}"
+                                             th:text="${e.getTitle()}"></div>
+                                        <p class="card-text text-secondary">
+                                            <th:block th:text="${e.getDescription()}"/>
+                                        </p>
+                                        <p class="card-text text-secondary">Held on: <span class="text-danger fw-bold"
+                                                                                           th:text="${e.getDate().getMonth() + ' ' + e.getDate().getDayOfMonth() + ', ' + e.getDate.getYear()}"></span>
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-6 px-2">
+                    <div class="pt-4 pb-1 px-2"
+                         th:each="event : ${initiative.getEvents()}"
+                         th:if="${!event.isClosed()}">
+                        <h5 class="pt-1 pb-3 px-2 fs-4 fw-bold">Latest event</h5>
+                        <div class="card text-dark bg-light mb-3">
+                            <div class="card-header">
+                                <h5 class="pt-1">
+                                    <th:block th:text="${event.getTitle()}"/>
+                                </h5>
+                                <div class="text-end pb-1">
+                                    <a th:href="@{'/events/{id}/going' (id=${event.getId()})}"
+                                       class="btn btn-outline-dark" id="btn-going">
+                                        Going
+                                    </a>
+                                </div>
+                                <!--                                <div th:each="part : ${initiative.getParticipants()}" th:if="${part.getId() eq user.getId()}" class="text-end pb-2">-->
+                                <!--                                    <a th:href="@{'/initiatives/id/event/eventId/not-going' (id=${initiative.getId()}, eventId=${event.getId()})}"-->
+                                <!--                                       class="btn btn-primary">-->
+                                <!--                                        Not Going-->
+                                <!--                                    </a>-->
+                                <!--                                </div>-->
+                            </div>
+                            <div class="card-body">
+                                <p class="card-text">
+                                    <th:block th:text="${event.getDescription()}"/>
+                                </p>
+                                <div class="text-end">
+                                    <small class="text-muted">
+                                        <th:block
+                                                th:text="${event.getDate().getMonth() + ' ' + event.getDate().getDayOfMonth() + ', ' + event.getDate().getYear()}"/>
+                                    </small>
+                                    <small class="text-muted">
+                                        <th:block th:text="${event.getTime()}"/>
+                                    </small>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $("#feedback").hide();
+
+        $("#btn-yes").click(function () {
+            let $openResponses = [];
+            $(".textarea-response").each(function () {
+                let tempObj = {
+                    "id": parseInt($(this).attr("id")),
+                    "response": $(this).val()
+                }
+                $openResponses.push(tempObj);
+            });
+
+            let $singleChoices = [];
+            $(".radio-poll:checked").each(function () {
+                $singleChoices.push(parseInt($(this).val()));
+            });
+
+            let $multipleChoices = [];
+            $(".checkbox-poll:checked").each(function () {
+                $multipleChoices.push(parseInt($(this).val()));
+            });
+
+            let dataToGo = {
+                "open": $openResponses,
+                "single": $singleChoices,
+                "multiple": $multipleChoices
+            }
+            // console.log(dataToGo);
+
+            $.ajax({
+                type: "POST",
+                url: "/api/polls/fill",
+                data: JSON.stringify(dataToGo),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#active-poll").hide();
+                    $("#feedback").show();
+                },
+                error: function (req, status, error) {
+                    alert("An error occurred :( Please try again!")
+                }
+            });
+        });
+
+        $("#btn-post").click(function () {
+            let $comment = $("#textarea-comment").val();
+            let $discussionId = $("#textarea-comment").attr("discussion");
+            let $author = $("#btn-post").attr("user");
+
+            let dataToGo = {
+                "content": $comment,
+                "author": $author
+            };
+            // console.log(dataToGo);
+
+            $.ajax({
+                type: "POST",
+                url: "/api/discussions/" + $discussionId + "/add-comment",
+                data: JSON.stringify(dataToGo),
+                contentType: "application/json",
+                success: function (response) {
+                    $("#textarea-comment").val("");
+                    fetchDiscussionComments($discussionId);
+                },
+                error: function (req, status, error) {
+                    console.log(req);
+                    alert("An error occurred :( Please try again!")
+                }
+            });
+
+        });
+
+    });
+
+    function fetchDiscussionComments(discussionId) {
+        $.ajax({
+            type: "GET",
+            url: "/api/discussions/" + discussionId + "/all-comments",
+            success: function (response) {
+                refreshDiscussionComments(response);
+            },
+            error: function (req, status, error) {
+                console.log(req);
+            }
+        });
+    }
+
+    function refreshDiscussionComments(data) {
+        $(".all-comments").html("");
+        for (let i = 0; i < data.length; i++) {
+            let div = $("<div>").addClass("card mb-2");
+            let headerDiv = $("<div>").addClass("card-header bg-secondary text-light")
+                .append("<i class='fa fa-user'></i> &nbsp;" + data[i].author.username);
+            div.append(headerDiv);
+
+            let bodyDiv = $("<div>").addClass("card-body bg-light");
+            let textP = $("<p>").addClass("card-text").text(data[i].content);
+            bodyDiv.append(textP);
+            let footerDiv = $("<div>").addClass("text-end");
+            let small = $("<small>").addClass("text-muted")
+
+            let splitedDate = data[i].datePosted.split("-");
+            dateAndTime = splitedDate.reverse().join("/") + " " + data[i].timePosted;
+
+            small.text(dateAndTime);
+            footerDiv.append(small);
+            bodyDiv.append(footerDiv);
+
+            div.append(bodyDiv);
+            $(".all-comments").append(div);
+        }
+    }
+</script>

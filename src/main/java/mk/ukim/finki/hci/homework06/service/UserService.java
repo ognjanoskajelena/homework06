@@ -10,5 +10,7 @@ public interface UserService {
 
     Optional<User> findByUsername(String username);
 
+    Optional<User> save(User user);
+
     Optional<User> deleteByUsername(String username);
 }

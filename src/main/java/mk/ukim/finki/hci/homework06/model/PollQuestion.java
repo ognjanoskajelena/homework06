@@ -1,5 +1,6 @@
 package mk.ukim.finki.hci.homework06.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import mk.ukim.finki.hci.homework06.model.enums.PollQuestionType;
 
@@ -19,6 +20,7 @@ public class PollQuestion {
     @Enumerated(EnumType.STRING)
     private PollQuestionType type;
 
+    @JsonIgnore
     @ManyToOne
     private Poll poll;
 

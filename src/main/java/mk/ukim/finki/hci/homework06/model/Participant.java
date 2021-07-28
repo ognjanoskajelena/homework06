@@ -1,5 +1,6 @@
 package mk.ukim.finki.hci.homework06.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import mk.ukim.finki.hci.homework06.model.enums.Role;
 
@@ -23,6 +24,7 @@ public class Participant extends User {
     private List<Webinar> webinars;
     */
 
+    @JsonIgnore
     @ManyToMany
     private List<Initiative> initiatives;
 

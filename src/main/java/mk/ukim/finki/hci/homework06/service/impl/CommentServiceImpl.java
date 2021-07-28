@@ -12,7 +12,9 @@ import mk.ukim.finki.hci.homework06.service.DiscussionService;
 import mk.ukim.finki.hci.homework06.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class CommentServiceImpl implements CommentService {
@@ -30,13 +32,19 @@ public class CommentServiceImpl implements CommentService {
     }
 
     @Override
+    public List<Comment> findByDiscussionId(Long discussionId) {
+        return this.commentRepository.findAll().stream()
+                .filter(c -> c.getDiscussion().getId().equals(discussionId))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public Optional<Comment> findById(Long id) {
         return this.commentRepository.findById(id);
     }
 
     @Override
-    public Optional<Comment> save(String content, String datePosted, String timePosted, String authorUsername,
-                                  Long discussionId) {
+    public Optional<Comment> save(String content, String authorUsername, Long discussionId) {
         Optional<User> author = this.userService.findByUsername(authorUsername);
         if(author.isEmpty())
             throw new UserNotFoundException(authorUsername);

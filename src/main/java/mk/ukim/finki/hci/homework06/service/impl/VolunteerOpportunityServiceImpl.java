@@ -9,6 +9,7 @@ import mk.ukim.finki.hci.homework06.service.UserService;
 import mk.ukim.finki.hci.homework06.service.VolunteerOpportunityService;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -26,6 +27,11 @@ public class VolunteerOpportunityServiceImpl implements VolunteerOpportunityServ
     @Override
     public Optional<VolunteerOpportunity> findById(Long id) {
         return this.volunteerOpportunityRepository.findById(id);
+    }
+
+    @Override
+    public List<VolunteerOpportunity> findAll() {
+        return this.volunteerOpportunityRepository.findAll();
     }
 
     @Override

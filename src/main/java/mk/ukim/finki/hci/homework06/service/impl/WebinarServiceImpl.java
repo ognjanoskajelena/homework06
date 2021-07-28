@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -34,6 +35,11 @@ public class WebinarServiceImpl implements WebinarService {
     @Override
     public Optional<Webinar> findById(Long id) {
         return this.webinarRepository.findById(id);
+    }
+
+    @Override
+    public List<Webinar> findAll() {
+        return this.webinarRepository.findAll();
     }
 
     @Override

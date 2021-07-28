@@ -1,4 +1,4 @@
-<div class="container db-social">
+<div class="container" id="jumbotron-header">
     <div class="jumbotron jumbotron-fluid"></div>
     <div class="container-fluid p-5">
         <div class="row justify-content-center">
@@ -9,12 +9,12 @@
                             <div class="col-xl-4 col-md-4 d-flex justify-content-lg-start justify-content-md-start justify-content-center">
                                 <ul>
                                     <li>
-                                        <div class="counter">Initiatives</div>
-                                        <div th:text="${user.getInitiatives().size()}" class="heading"></div>
+                                        <div th:text="${user.getInitiatives().size()}" class="counter"></div>
+                                        <div class="heading">Initiatives</div>
                                     </li>
                                     <li>
-                                        <div class="counter">Events</div>
-                                        <div th:text="${user.getEvents().size()}" class="heading"></div>
+                                        <div th:text="${user.getEvents().size()}" class="counter"></div>
+                                        <div class="heading">Events</div>
                                     </li>
                                 </ul>
                             </div>
@@ -27,8 +27,8 @@
                                 </div>
                             </div>
                             <div class="col-xl-4 col-md-4 d-flex justify-content-lg-end justify-content-md-end justify-content-center">
-                                <div class="follow">
-                                    <a class="btn btn-shadow" href="/logout">Logout</a>
+                                <div class="px-4">
+                                    <a class="btn btn-logout" href="/logout">Logout</a>
                                 </div>
                             </div>
                         </div>
@@ -43,74 +43,35 @@
     <div class="row">
         <div class="col-md-6">
             <div class="section-title">
-                <h2>My Initiatives</h2>
-                <p>I design and develop services for customers of all sizes, specializing in creating stylish, modern
-                    websites</p>
+                <h4>My Initiatives</h4>
             </div>
-            <div>
+            <div th:if="${initiatives.size() > 0}">
                 <ul class="list-group">
-                    <li class="card box w-75">
-                        <div class="img-fluid slide-img">
-                            <div class="overlay">
-                                <a href="/city/" class="more-btn">Read more</a>
-                            </div>
+                    <li th:each="i : ${initiatives}" class="card box">
+                        <div class="overlay">
+                            <a th:href="@{'/initiatives/{id}' (id=${i.getId()})}" class="more-btn read-more">
+                                Read more
+                            </a>
+                            &nbsp;
+                            <a th:href="@{'/initiatives/{id}/remove-part' (id=${i.getId()})}"
+                               class="more-btn remove">
+                                Remove
+                            </a>
                         </div>
                         <div class="card-header">
-                            Featured
+                            Initiator:
+                            <b>
+                                <th:block th:text="${i.getInitiator().getUsername()}"/>
+                            </b>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <p class="card-text text-muted text-end">2 days ago</p>
-                        </div>
-                    </li>
-                    <li class="card box w-75">
-                        <div class="img-fluid slide-img">
-                            <div class="overlay">
-                                <a href="/city/" class="more-btn">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card-header">
-                            Featured
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <p class="card-text text-muted text-end">2 days ago</p>
-                        </div>
-                    </li>
-                    <li class="card box w-75">
-                        <div class="img-fluid slide-img">
-                            <div class="overlay">
-                                <a href="/city/" class="more-btn">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card-header">
-                            Featured
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <p class="card-text text-muted text-end">2 days ago</p>
-                        </div>
-                    </li>
-                    <li class="card box w-75">
-                        <div class="img-fluid slide-img">
-                            <div class="overlay">
-                                <a href="/city/" class="more-btn">Read more</a>
-                            </div>
-                        </div>
-                        <div class="card-header">
-                            Featured
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <p class="card-text text-muted text-end">2 days ago</p>
+                            <h5 th:text="${i.getTitle()}" class="card-title pb-2"></h5>
+                            <p th:text="${i.getDescription()}" class="card-text"></p>
+                            <p class="card-text text-muted text-end">
+                                Opened on:
+                                <th:block
+                                        th:text="${i.getDateOpened().getMonth() + ' ' + i.getDateOpened().getDayOfMonth() + ', ' + i.getDateOpened().getYear()}"/>
+                            </p>
                         </div>
                     </li>
                 </ul>
@@ -118,43 +79,27 @@
         </div>
         <div class="col-md-6">
             <div class="section-title">
-                <h2>Incoming Events</h2>
-                <p>I design and develop services for customers of all sizes, specializing in creating stylish, modern
-                    websites</p>
+                <h4>Incoming Events</h4>
             </div>
-            <div>
+            <div th:if="${events.size() > 0}">
                 <ul class="list-group">
-                    <li class="card mb-2">
+                    <li th:each="e : ${events}" class="card mb-2">
                         <div class="card-header text-end">
-                            2 days from now
+                            Scheduled for:
+                            <b>
+                                <th:block
+                                        th:text="${e.getDate().getMonth() + ' ' + e.getDate().getDayOfMonth() + ', ' + e.getDate().getYear() + ' ' + e.getTime()}"/>
+                            </b>
                         </div>
                         <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <div class="text-end"><a href="#" class="btn btn-secondary">Not going</a></div>
-                        </div>
-                    </li>
-                    <li class="card mb-2">
-                        <div class="card-header text-end">
-                            2 days from now
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <div class="text-end"><a href="#" class="btn btn-secondary">Not going</a></div>
-                        </div>
-                    </li>
-                    <li class="card mb-2">
-                        <div class="card-header text-end">
-                            2 days from now
-                        </div>
-                        <div class="card-body">
-                            <h5 class="card-title">Special title treatment</h5>
-                            <p class="card-text">With supporting text below as a natural lead-in to additional
-                                content.</p>
-                            <div class="text-end"><a href="#" class="btn btn-secondary">Not going</a></div>
+                            <h5 th:text="${e.getTitle()}" class="card-title pb-2"></h5>
+                            <p th:text="${e.getDescription()}" class="card-text"></p>
+                            <div class="text-end">
+                                <a th:href="@{'/events/{id}/not-going' (id=${e.getId()})}"
+                                   class="btn btn-outline-danger">
+                                    Not going
+                                </a>
+                            </div>
                         </div>
                     </li>
                 </ul>

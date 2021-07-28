@@ -1,5 +1,6 @@
 package mk.ukim.finki.hci.homework06.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class Poll {
     @OneToMany(mappedBy = "poll", orphanRemoval = true)
     private List<PollQuestion> questions;
 
+    @JsonIgnore
     @ManyToOne
     private Initiative initiative;
 

@@ -11,7 +11,7 @@ import mk.ukim.finki.hci.homework06.repository.PollRepository;
 import mk.ukim.finki.hci.homework06.service.*;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -36,22 +36,27 @@ public class InitiativeServiceImpl implements InitiativeService {
     }
 
     @Override
+    public List<Initiative> findAll() {
+        return this.initiativeRepository.findAll();
+    }
+
+    @Override
     public Optional<Initiative> findById(Long id) {
         return this.initiativeRepository.findById(id);
     }
 
     @Override
-    public Optional<Initiative> save(String title, String description, String dateOpened, Long initiatorId) {
+    public Optional<Initiative> save(String title, String description, Long initiatorId) {
         Optional<User> initiator = this.userService.findById(initiatorId);
         if(initiator.isEmpty())
             throw new InitiatorNotFoundException(initiatorId);
 
-        Initiative initiative = new Initiative(title, description, LocalDate.parse(dateOpened), initiator.get());
+        Initiative initiative = new Initiative(title, description, initiator.get());
         return Optional.of(this.initiativeRepository.save(initiative));
     }
 
     @Override
-    public Optional<Initiative> update(Long id, String title, String description, String dateOpened) {
+    public Optional<Initiative> update(Long id, String title, String description) {
         Optional<Initiative> initiative = this.findById(id);
         if(initiative.isEmpty())
             throw new InitiativeNotFoundException(id);
@@ -59,7 +64,6 @@ public class InitiativeServiceImpl implements InitiativeService {
         Initiative updatedInitiative = initiative.get();
         updatedInitiative.setTitle(title);
         updatedInitiative.setDescription(description);
-        updatedInitiative.setDateOpened(LocalDate.parse(dateOpened));
 
         return Optional.of(this.initiativeRepository.save(updatedInitiative));
     }
@@ -107,36 +111,6 @@ public class InitiativeServiceImpl implements InitiativeService {
         this.discussionRepository.save(discussion);
         Initiative updatedInitiative = initiative.get();
         updatedInitiative.addToDiscussions(discussion);
-        return Optional.of(this.initiativeRepository.save(updatedInitiative));
-    }
-
-    @Override
-    public Optional<Initiative> addParticipant(Long initiativeId, Long participantId) {
-        Optional<Initiative> initiative = this.findById(initiativeId);
-        if(initiative.isEmpty())
-            throw new InitiativeNotFoundException(initiativeId);
-
-        Optional<Participant> participant = this.participantService.findById(participantId);
-        if(participant.isEmpty())
-            throw new ParticipantNotFoundException(participantId);
-
-        Initiative updatedInitiative = initiative.get();
-        updatedInitiative.addToParticipants(participant.get());
-        return Optional.of(this.initiativeRepository.save(updatedInitiative));
-    }
-
-    @Override
-    public Optional<Initiative> removeParticipant(Long initiativeId, Long participantId) {
-        Optional<Initiative> initiative = this.findById(initiativeId);
-        if(initiative.isEmpty())
-            throw new InitiativeNotFoundException(initiativeId);
-
-        Optional<Participant> participant = this.participantService.findById(participantId);
-        if(participant.isEmpty())
-            throw new ParticipantNotFoundException(participantId);
-
-        Initiative updatedInitiative = initiative.get();
-        updatedInitiative.removeFromParticipants(participant.get());
         return Optional.of(this.initiativeRepository.save(updatedInitiative));
     }
 }

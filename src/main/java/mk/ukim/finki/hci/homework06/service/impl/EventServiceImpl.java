@@ -57,6 +57,11 @@ public class EventServiceImpl implements EventService {
     }
 
     @Override
+    public Optional<Event> save(Event event) {
+        return Optional.of(this.eventRepository.save(event));
+    }
+
+    @Override
     public Optional<Event> update(Long id, String title, String description, String date, String time) {
         Optional<Event> event = this.eventRepository.findById(id);
         if(event.isEmpty())

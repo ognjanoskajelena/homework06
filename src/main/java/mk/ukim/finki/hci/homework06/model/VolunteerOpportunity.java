@@ -15,6 +15,7 @@ public class VolunteerOpportunity {
 
     private String topic;
 
+    @Column(length = 1024)
     private String description;
 
     private LocalDate datePosted;

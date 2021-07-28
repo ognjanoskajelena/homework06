@@ -28,6 +28,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public Optional<User> save(User user) {
+        return Optional.of(this.userRepository.save(user));
+    }
+
+    @Override
     public Optional<User> deleteByUsername(String username) {
         Optional<User> user = this.findByUsername(username);
         if(user.isEmpty())

@@ -1,0 +1,27 @@
+#initiative-details .tab-item-btn {
+    font-size: 2.5vh;
+}
+
+#initiative-details .tab-item-btn button {
+    color: #401f3eff;
+    font-weight: 300;
+}
+
+#initiative-details .tab-item-btn button:hover {
+    color: #8A4285;
+    font-size: 2.6vh;
+    font-weight: bold;
+}
+
+#initiative-details .initiator-paragraph {
+    background: rgba(252, 247, 197, 0.7);
+}
+
+#initiative-details #active-poll {
+    border: 1px solid lightgray;
+    background: rgba(200, 200, 200, 0.2);
+}
+
+#initiative-details #active-discussion .comment-post {
+
+}

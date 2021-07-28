@@ -1,7 +1,6 @@
-.feature-box-1 {
+.initiative-box {
     padding: 25px;
-    box-shadow: 0 0 30px rgba(31, 45, 61, 0.125);
-    margin: 15px 0;
+    box-shadow: 0 0 12px rgba(31, 45, 61, 0.125);
     position: relative;
     z-index: 1;
     overflow: hidden;
@@ -12,18 +11,18 @@
     top: 0;
 }
 
-.feature-box-1 * {
+.initiative-box * {
     -moz-transition: ease all 0.5s;
     -o-transition: ease all 0.5s;
     -webkit-transition: ease all 0.5s;
     transition: ease all 0.5s;
 }
 
-.feature-box-1 .icon {
+.initiative-box .icon {
     width: 50px;
     height: 50px;
     line-height: 0;
-    background: #401f3eff;
+    background: #c6d19fff;
     color: #ffffff;
     text-align: center;
     border-radius: 50%;
@@ -31,20 +30,23 @@
     font-size: 20px;
 }
 
-.feature-box-1 .icon i {
+.initiative-box .icon i {
     line-height: 50px;
 }
 
-.feature-box-1 .feature-content h5 {
-    color: black;
-    font-weight: 500;
+.initiative-box .initiative-content h5 {
+    color: #0d1821ff;
 }
 
-.feature-box-1 .feature-content p {
-    color: black;
+.initiative-box .initiative-content p {
+    color: #0d1821ff;
 }
 
-.feature-box-1:after {
+.initiative-box .initiative-content span {
+    font-size: 2vh;
+}
+
+.initiative-box:after {
     content: "";
     position: absolute;
     top: 0;
@@ -52,7 +54,7 @@
     left: auto;
     right: 0;
     width: 0;
-    background: rgba(64, 31, 62, 1);
+    background: #c6d19fff;
     z-index: -1;
     -moz-transition: ease all 1s;
     -o-transition: ease all 1s;
@@ -60,24 +62,24 @@
     transition: ease all 1s;
 }
 
-.feature-box-1:hover {
+.initiative-box:hover {
     top: -5px;
 }
 
-.feature-box-1:hover .feature-content h5, span {
+.initiative-box:hover .initiative-content h5, span {
     color: #ffffff;
 }
 
-.feature-box-1:hover .feature-content p {
+.initiative-box:hover .initiative-content p {
     color: #ffffff;
 }
 
-.feature-box-1:hover .icon {
-    color: rgba(64, 31, 62, 1);
-    background: #fff8f0ff;
+.initiative-box:hover .icon {
+    color: #c6d19fff;
+    background: white;
 }
 
-.feature-box-1:hover:after {
+.initiative-box:hover:after {
     width: 100%;
     height: 100%;
     left: 0;

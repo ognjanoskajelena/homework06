@@ -4,6 +4,7 @@ import mk.ukim.finki.hci.homework06.model.OpenQuestion;
 import mk.ukim.finki.hci.homework06.model.Poll;
 import mk.ukim.finki.hci.homework06.model.PollQuestion;
 import mk.ukim.finki.hci.homework06.model.exception.PollNotFoundException;
+import mk.ukim.finki.hci.homework06.model.exception.PollQuestionNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.OpenQuestionRepository;
 import mk.ukim.finki.hci.homework06.service.OpenQuestionService;
 import mk.ukim.finki.hci.homework06.service.PollService;
@@ -29,12 +30,23 @@ public class OpenQuestionServiceImpl implements OpenQuestionService {
     }
 
     @Override
-    public Optional<PollQuestion> save(String content, Long pollId, String response) {
+    public Optional<PollQuestion> save(String content, Long pollId) {
         Optional<Poll> poll = this.pollService.findById(pollId);
-        if(poll.isEmpty())
+        if (poll.isEmpty())
             throw new PollNotFoundException(pollId);
 
-        PollQuestion openQuestion = new OpenQuestion(content, poll.get(), response);
+        PollQuestion openQuestion = new OpenQuestion(content, poll.get());
         return Optional.of(this.openQuestionRepository.save(openQuestion));
+    }
+
+    @Override
+    public Optional<OpenQuestion> respond(Long questionId, String response) {
+        Optional<OpenQuestion> openQuestion = this.findById(questionId);
+        if (openQuestion.isPresent()) {
+            openQuestion.get().respond(response);
+            this.openQuestionRepository.save(openQuestion.get());
+            return openQuestion;
+        }
+        throw new PollQuestionNotFoundException(questionId);
     }
 }
