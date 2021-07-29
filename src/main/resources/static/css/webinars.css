@@ -43,7 +43,7 @@
     left: auto;
     right: 0;
     width: 0;
-    background: rgba(180, 205, 236, 0.5);
+    background: rgba(180, 205, 236, 0.3);
     z-index: -1;
     -moz-transition: ease all 1s;
     -o-transition: ease all 1s;

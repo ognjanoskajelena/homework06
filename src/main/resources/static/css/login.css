@@ -4,7 +4,6 @@
 }
 
 .registration-form form {
-    background: linear-gradient(135deg, #401f3eff, #ec0b43ff);
     max-width: 750px;
     margin: auto;
     padding: 60px 90px;
@@ -15,10 +14,10 @@
 
 .registration-form .form-icon {
     text-align: center;
-    background-color: white;
+    background-color: #b4cde4ff;
     border-radius: 50%;
     font-size: 40px;
-    color: #401f3eff;
+    color: white;
     width: 100px;
     height: 100px;
     margin: auto auto 50px;
@@ -30,24 +29,24 @@
     border-radius: 8px;
     margin-bottom: 25px;
     padding: 10px 20px;
+    border-color: #b4cded;
 }
 
-.registration-form .create-account {
+.registration-form .login {
     border-radius: 6px;
     padding: 8px 18px;
     font-size: 16px;
     font-weight: bold;
-    background-color: white;
-    border: none;
-    color: #401f3eff;
+    background-color: #0d1821ff;
+    color: white;
     margin-top: 20px;
 }
 
-.registration-form .create-account:hover {
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+.registration-form .login:hover {
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
-.registration-form .social-media {
+.registration-form .additional {
     max-width: 750px;
     background-color: #fff;
     margin: auto;
@@ -56,8 +55,19 @@
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     color: #9fadca;
-    border-top: 2px solid rgba(236, 11, 67, 0.5);;
+    border-top: 2px solid rgba(180, 205, 228, 0.5);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.registration-form .additional a {
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    background-color: white;
+    color: #0d1821ff;
+    margin-top: 20px;
+    border-color: #0d1821ff;
 }
 
 @media (max-width: 576px) {

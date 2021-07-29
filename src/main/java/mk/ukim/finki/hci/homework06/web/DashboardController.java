@@ -3,7 +3,7 @@ package mk.ukim.finki.hci.homework06.web;
 import mk.ukim.finki.hci.homework06.model.Participant;
 import mk.ukim.finki.hci.homework06.model.User;
 import mk.ukim.finki.hci.homework06.service.UserService;
-//import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,7 +22,7 @@ public class DashboardController {
         this.userService = userService;
     }
 
-//    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_INITIATOR','ROLE_PARTICIPANT')")
+    @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_INITIATOR','ROLE_PARTICIPANT')")
     @GetMapping
     public String getDashboardPage(HttpServletRequest request, Model model) {
         Optional<User> optionalUser = this.userService.findByUsername(request.getRemoteUser());

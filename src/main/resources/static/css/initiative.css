@@ -1,27 +1,83 @@
 #initiative-details .tab-item-btn {
-    font-size: 2.5vh;
+    font-size: 2.4vh;
 }
 
 #initiative-details .tab-item-btn button {
-    color: #401f3eff;
+    color: #0d1821ff;
     font-weight: 300;
 }
 
 #initiative-details .tab-item-btn button:hover {
-    color: #8A4285;
-    font-size: 2.6vh;
+    color: #344966ff;
+    font-size: 2.5vh;
     font-weight: bold;
 }
 
 #initiative-details .initiator-paragraph {
-    background: rgba(252, 247, 197, 0.7);
+    background: rgba(240, 244, 239, 1);
 }
 
-#initiative-details #active-poll {
+#initiative-details #polls .closed-poll {
+    background: rgba(180, 205, 228, 0.2);
+}
+
+#initiative-details #polls #active-poll {
     border: 1px solid lightgray;
-    background: rgba(200, 200, 200, 0.2);
+    background: rgba(200, 200, 200, 0.1);
+    box-shadow: 1px 1px 2px 2px rgba(52, 40, 104, .1);
 }
 
-#initiative-details #active-discussion .comment-post {
+#initiative-details #polls #active-poll #send-poll {
+    background: white;
+    color: #0d1821ff;
+    border-color: #344966ff;
+}
 
+#initiative-details #polls #active-poll #send-poll:hover {
+    background: #344966ff;
+    color: white;
+}
+
+#initiative-details #polls #active-poll #btn-yes {
+    background: #344966ff;
+    color: white;
+}
+
+#initiative-details #discussions #active-discussion .all-comments .card-header {
+    background: rgba(180, 205, 228, 1);
+    color: #0d1821ff;
+}
+
+#initiative-details #active-discussion .all-comments .card-body {
+    background: rgba(180, 205, 228, 0.2);
+}
+
+#initiative-details #discussions #active-discussion #btn-post {
+    background: white;
+    border-color: #344966ff;
+    color: #344966ff;
+    text-align: center;
+    margin-top: 8%;
+}
+
+#initiative-details #discussions #active-discussion #btn-post:hover {
+    background: #344966ff;
+    color: white;
+}
+
+#initiative-details #events #latest-event .card-header {
+    background: rgba(240, 244, 239, 1);
+    color: #0d1821ff;
+    font-size: 2.5vh;
+}
+
+#initiative-details #events #latest-event .card-header #btn-going {
+    background: white;
+    color: #0d1821ff;
+    border-color: #0d1821ff;
+}
+
+#initiative-details #events #latest-event .card-header #btn-going:hover {
+    background: #0d1821ff;
+    color: white;
 }

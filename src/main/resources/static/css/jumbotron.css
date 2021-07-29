@@ -70,19 +70,16 @@
 }
 
 #jumbotron-header .follow .bell {
-    background: #ffcd00;
-    color: white;
-    font-size: 1.8rem;
-    line-height: 1.8rem;
-    border-radius: 50%;
-    padding: 21px 25px 21px 25px;
-    text-align: center;
-    box-shadow: 1px 1px 2px 2px rgba(52, 40, 104, .125);
+    background: white;
+    border-color: #ffcd00;
+    color: #ffcd00;
+    font-size: 2.2vh;
 }
 
 #jumbotron-header .follow .bell:hover {
     background: #ffd400;
-    padding: 23px 27px 23px 27px;
+    color: white;
+    box-shadow: 1px 1px 2px 2px rgba(52, 40, 104, .125);
 }
 
 #jumbotron-header .btn-logout {

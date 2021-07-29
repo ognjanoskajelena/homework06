@@ -47,7 +47,7 @@
             </div>
             <div th:if="${initiatives.size() > 0}">
                 <ul class="list-group">
-                    <li th:each="i : ${initiatives}" class="card box">
+                    <li th:each="i : ${initiatives}" class="card box mb-2">
                         <div class="overlay">
                             <a th:href="@{'/initiatives/{id}' (id=${i.getId()})}" class="more-btn read-more">
                                 Read more
