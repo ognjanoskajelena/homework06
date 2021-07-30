@@ -8,6 +8,7 @@ import java.util.List;
 @Data
 public class PollDto {
 
+    private String username;
     private List<OpenQuestionDto> open;
     private List<Long> single;
     private List<Long> multiple;
@@ -18,7 +19,8 @@ public class PollDto {
         multiple = new ArrayList<>();
     }
 
-    public PollDto(List<OpenQuestionDto> open, List<Long> single, List<Long> multiple) {
+    public PollDto(String username, List<OpenQuestionDto> open, List<Long> single, List<Long> multiple) {
+        this.username = username;
         this.open = open;
         this.single = single;
         this.multiple = multiple;

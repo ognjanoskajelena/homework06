@@ -22,7 +22,7 @@
     width: 50px;
     height: 50px;
     line-height: 0;
-    background: #c6d19fff;
+    background: #344966ff;
     color: #ffffff;
     text-align: center;
     border-radius: 50%;
@@ -54,7 +54,7 @@
     left: auto;
     right: 0;
     width: 0;
-    background: #c6d19fff;
+    background: #344966ff;
     z-index: -1;
     -moz-transition: ease all 1s;
     -o-transition: ease all 1s;
@@ -75,7 +75,7 @@
 }
 
 .initiative-box:hover .icon {
-    color: #c6d19fff;
+    color: #344966ff;
     background: white;
 }
 

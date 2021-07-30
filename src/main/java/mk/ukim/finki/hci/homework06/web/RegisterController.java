@@ -24,7 +24,7 @@ public class RegisterController {
     public String getRegisterPage(@RequestParam(required = false) String error, Model model) {
         if(error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
-            model.addAttribute("error", error);
+            model.addAttribute("error", error + " Please try again.");
         }
         model.addAttribute("headTitle", "Register Page");
         model.addAttribute("style1", "header.css");

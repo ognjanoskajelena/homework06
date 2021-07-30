@@ -20,10 +20,10 @@
     </div>
 </div>
 
-<div th:if="${initiatives.size() > 0}" class="container mt-2 mb-5 pb-4">
+<div th:if="${initiatives.size() > 0}" class="container mb-5 pb-4">
     <div class="row">
 
-        <div th:each="i : ${initiatives}" class="col-md-6">
+        <div th:each="i : ${initiatives}" class="col-md-12">
             <div class="initiative-box mb-3">
                 <div th:title="${i.getInitiator().getUsername()}" class="icon">
                     <i class="fa fa-user"></i>
@@ -35,7 +35,7 @@
                         Number of participants: <b><th:block th:text="${i.getParticipants().size()}"/></b>
                     </span>
                     <div class="text-end">
-                        <a th:href="@{'/initiatives/{id}' (id=${i.getId()})}" class="btn btn-light">More</a>
+                        <a th:href="@{'/initiatives/{id}' (id=${i.getId()})}" class="btn btn-light">More activities</a>
                     </div>
                 </div>
             </div>

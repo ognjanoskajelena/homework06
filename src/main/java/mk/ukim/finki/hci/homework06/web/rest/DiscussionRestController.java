@@ -5,6 +5,7 @@ import mk.ukim.finki.hci.homework06.model.dto.CommentDto;
 import mk.ukim.finki.hci.homework06.model.exception.DiscussionNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.UserNotFoundException;
 import mk.ukim.finki.hci.homework06.service.CommentService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,10 +26,13 @@ public class DiscussionRestController {
     }
 
     @PostMapping("/{id}/add-comment")
-    public void addComment(@PathVariable Long id, @RequestBody CommentDto commentDto) {
+    public ResponseEntity<Comment> addComment(@PathVariable Long id, @RequestBody CommentDto commentDto) {
         try {
-            this.commentService.save(commentDto.getContent(), commentDto.getAuthor(), id);
+            return this.commentService.save(commentDto.getContent(), commentDto.getAuthor(), id)
+                    .map(comment -> ResponseEntity.ok().body(comment)).
+                    orElseGet(() -> ResponseEntity.notFound().build());
         } catch (UserNotFoundException | DiscussionNotFoundException e) {
+            return ResponseEntity.notFound().build();
         }
     }
 }

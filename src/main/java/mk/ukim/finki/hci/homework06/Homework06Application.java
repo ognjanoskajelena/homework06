@@ -26,9 +26,12 @@ public class Homework06Application {
                 configurableApplicationContext.getBean(ParticipantRepository.class);
         User initiator = new User("John", "Doe", "john_doe", "jd",
                 "john.doe@yahoo.com", LocalDate.now(), Role.ROLE_INITIATOR);
-        User admin = new User("Diana", "Sanchez", "dianna.s", "ds",
-                "diana.s@outlook.com", LocalDate.now(), Role.ROLE_ADMIN);
-        User participant = new Participant("Jelena", "Ognjanoska", "jelena.o", "jo",
+        User admin = new User("Admin", "Admin", "admin.a", "aa",
+                "admin.a@outlook.com", LocalDate.now(), Role.ROLE_ADMIN);
+        User participant = new Participant("TestName", "TestSurname", "test", "tt",
+                "test@test.com", LocalDate.now());
+        participantRepository.save(participant);
+        participant = new Participant("Jelena", "Ognjanoska", "jelena.o", "jo",
                 "j.ognjanoska@yahoo.com", LocalDate.now());
         userRepository.save(initiator);
         userRepository.save(admin);
@@ -37,7 +40,7 @@ public class Homework06Application {
         // Initiatives
         InitiativeRepository initiativeRepository = configurableApplicationContext.getBean(InitiativeRepository.class);
         Initiative initiative = new Initiative("New children park in Maleardi",
-                "Dear citizens, especially parents, the goal of this initiative is and will be along the way, to get new clean and beautiful park for our children. Every support is extremelly important and valuable.",
+                "Dear citizens, especially parents, the goal of this initiative is and will be along the way, to get new clean and beautiful park for our children. Every support is extremely important and valuable.",
                 initiator);
         initiativeRepository.save(initiative);
         initiative = new Initiative("Landfill problem in Banjica", "The problem with the Rusino landfill is just getting worse. Polluting our food, air and water, this needs to be solved as fast as possible. And we can't let the control out of our hands. No one cares more about our families and friends than we do ourselves.",
@@ -124,7 +127,7 @@ public class Homework06Application {
         CommentRepository commentRepository = configurableApplicationContext.getBean(CommentRepository.class);
         Comment comment = new Comment("I think that we need more qualified lawyers, because they are trying to avoid all the bad circumstances.", participant, discussion);
         commentRepository.save(comment);
-        comment = new Comment("I totally agree with Mr. Charles's comment (above), also i am a lawyer with 17 years of experience and like this one (won) cases, so i will be happy to contribute in this matter.", participant, discussion);
+        comment = new Comment("I totally agree with Mr. Charles's comment (above), also i am a lawyer with 17 years of experience, so i will be happy to contribute in this matter.", participant, discussion);
         commentRepository.save(comment);
 
         //Events
@@ -145,7 +148,7 @@ public class Homework06Application {
         VolunteerOpportunityRepository volunteerOpportunityRepository = configurableApplicationContext
                 .getBean(VolunteerOpportunityRepository.class);
         VolunteerOpportunity volunteerOpportunity = new VolunteerOpportunity("Donation of school reads for first, second, third and fourth graders",
-                "The kids in the Edinstvo middle school struggle with copies of school reads. Any samples are welcomed, as long as they are in a readable state. Any needed repairments will be made after the collecting. That activity will also require recruiting volunteers, so if you are interested, stay tuned :)",
+                "The kids in the \"Edinstvo\" middle school struggle with copies of school reads. Any samples are welcomed, as long as they are in a readable state. Any needed repairments will be made after the collecting. That activity will also require recruiting volunteers, so if you are interested, stay tuned :)",
                 admin);
         volunteerOpportunityRepository.save(volunteerOpportunity);
         volunteerOpportunity = new VolunteerOpportunity("Ecological action in our city park",

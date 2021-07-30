@@ -19,7 +19,7 @@ public interface PollService {
 
     Optional<Poll> deleteById(Long id);
 
-    Optional<Poll> fill(Long pollId, Long participantId);
+    Optional<Poll> fill(Long pollId, String participantUsername);
 
     Optional<Poll> addQuestion(Long pollId, PollQuestion question);
 }

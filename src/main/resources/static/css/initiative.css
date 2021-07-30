@@ -43,26 +43,36 @@
     color: white;
 }
 
+#initiative-details #active-discussion .all-comments .card {
+    border-color: #344966ff;
+}
+
 #initiative-details #discussions #active-discussion .all-comments .card-header {
-    background: rgba(180, 205, 228, 1);
+    background: white;
     color: #0d1821ff;
 }
 
 #initiative-details #active-discussion .all-comments .card-body {
-    background: rgba(180, 205, 228, 0.2);
+    background: rgba(180, 205, 228, 0.1);
+}
+
+#initiative-details #discussions #active-discussion .all-comments .delete-comment:hover {
+    cursor: pointer;
 }
 
 #initiative-details #discussions #active-discussion #btn-post {
-    background: white;
-    border-color: #344966ff;
-    color: #344966ff;
+    background: #344966ff;
+    border: 1px solid #344966ff;
+    color: white;
     text-align: center;
-    margin-top: 8%;
+    margin-top: 6%;
+    padding: 10px 12px;
+    border-radius: 50%;
 }
 
 #initiative-details #discussions #active-discussion #btn-post:hover {
-    background: #344966ff;
-    color: white;
+    background: white;
+    color: #344966ff;
 }
 
 #initiative-details #events #latest-event .card-header {

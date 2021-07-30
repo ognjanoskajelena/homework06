@@ -43,27 +43,25 @@
                 </div>
             </div>
         </div>
-        <div class="modal" id="feedbackModal" tabindex="-1"
-             aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-dialog-centered">
+        <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+            <div class="modal-dialog  modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title fw-bold">We are glad for your interest!</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal"
-                                aria-label="Close"></button>
+                        <h5 class="modal-title fw-bold" id="feedbackModalLabel">
+                            We are glad for your interest!
+                        </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
-                        Thank You
+                        Dear
                         <b><th:block th:if="${#request.getRemoteUser() != null}"
-                                      th:text="${#request.getRemoteUser()}"/></b>,
-                        we will send You information with additional instructions on your email address,
-                        and from now on we will communicate via email, on this matter. :)
+                                     th:text="${#request.getRemoteUser()}"/></b>, if you agree we will send you more
+                        information on your email address on this matter, and continue the collaboration via email.
+                        <span class="d-inline-block pt-2">Are you sure you want to engage in this opportunity?</span>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary float-start"
-                                data-bs-dismiss="modal">
-                            Close
-                        </button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-dark" data-bs-dismiss="modal">Yes</button>
                     </div>
                 </div>
             </div>

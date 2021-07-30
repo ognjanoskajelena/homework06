@@ -7,6 +7,7 @@ import mk.ukim.finki.hci.homework06.model.PollQuestion;
 import mk.ukim.finki.hci.homework06.model.exception.InitiativeNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.ParticipantNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.PollNotFoundException;
+import mk.ukim.finki.hci.homework06.model.exception.UserNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.PollRepository;
 import mk.ukim.finki.hci.homework06.service.*;
 import org.springframework.stereotype.Service;
@@ -87,14 +88,14 @@ public class PollServiceImpl implements PollService {
     }
 
     @Override
-    public Optional<Poll> fill(Long pollId, Long participantId) {
+    public Optional<Poll> fill(Long pollId, String participantUsername) {
         Optional<Poll> poll = this.findById(pollId);
         if (poll.isEmpty())
             throw new PollNotFoundException(pollId);
 
-        Optional<Participant> participant = this.participantService.findById(participantId);
+        Optional<Participant> participant = this.participantService.findByUsername(participantUsername);
         if (participant.isEmpty())
-            throw new ParticipantNotFoundException(participantId);
+            throw new UserNotFoundException(participantUsername);
 
         Poll updatedPoll = poll.get();
         updatedPoll.addToParticipants(participant.get());

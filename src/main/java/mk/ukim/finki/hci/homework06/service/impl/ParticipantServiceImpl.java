@@ -31,6 +31,12 @@ public class ParticipantServiceImpl implements ParticipantService {
     }
 
     @Override
+    public Optional<Participant> findByUsername(String username) {
+        Optional<User> participant = this.participantRepository.findByUsername(username);
+        return participant.map(user -> (Participant) user);
+    }
+
+    @Override
     public Optional<Participant> participate(Long participantId, Long initiativeId) {
         Optional<Participant> participant = this.findById(participantId);
         if(participant.isEmpty())

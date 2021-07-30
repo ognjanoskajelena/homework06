@@ -53,8 +53,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .password(this.passwordEncoder.encode("jo"))
                 .authorities("ROLE_PARTICIPANT")
                 .and()
-                .withUser("dianna.s")
-                .password(this.passwordEncoder.encode("ds"))
-                .authorities("ROLE_ADMIN");
+                .withUser("admin.a")
+                .password(this.passwordEncoder.encode("aa"))
+                .authorities("ROLE_ADMIN")
+                .and()
+                .withUser("test")
+                .password(this.passwordEncoder.encode("tt"))
+                .authorities("ROLE_PARTICIPANT");
     }
 }

@@ -20,7 +20,7 @@
                                         <th:block th:text="${initiative.getTitle()}"/>
                                     </h2>
                                     <div class="location">
-                                        Open date |
+                                        Opened on:
                                         <b>
                                             <th:block
                                                     th:text="${initiative.getDateOpened().getMonth() + ' ' + initiative.getDateOpened().getDayOfMonth() + ', ' + initiative.getDateOpened().getYear()}"/>
@@ -182,7 +182,7 @@
                         </ol>
                         <div class="text-center">
                             <button type="button" class="btn px-4" id="send-poll" data-bs-toggle="modal"
-                                    data-bs-target="#confirmModal">
+                                    data-bs-target="#confirmModal" th:pollId="${p.getId()}">
                                 SEND
                             </button>
                             <div class="modal fade" id="confirmModal" tabindex="-1"
@@ -211,8 +211,8 @@
                             </div>
                         </div>
                     </div>
-                    <div id="feedback" class="h-100 p-3 text-center">
-                        <h4 class="d-inline-block align-middle text-muted">Thank you! No more active polls.</h4>
+                    <div id="feedback" class="h-100 p-3 text-center fs-4 text-muted">
+                        Thank you! Your response is successfully delivered.
                     </div>
                 </div>
             </div>
@@ -270,13 +270,21 @@
                         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0"
                              class="all-comments scrollspy-example col-12" tabindex="0">
                             <div th:each="c : ${diss.getComments()}" class="card mb-1">
-                                <div class="card-header">
-                                    <i class="fa fa-user"></i>&nbsp;
-                                    <th:block th:text="${c.getAuthor().getUsername()}"/>
+                                <div class="card-header text-end py-1">
+                                    <th:block th:if="${c.getAuthor().getUsername() eq #request.getRemoteUser()}">
+                                        <i class="fa fa-trash text-danger fs-5 pt-1 delete-comment"
+                                           th:id="${c.getId()}"></i>
+                                    </th:block>
                                 </div>
                                 <div class="card-body">
                                     <p class="card-text">
-                                        <th:block th:text="${c.getContent()}"/>
+                                        <span class="d-block pb-2">
+                                            <i class="fa fa-user"></i>&nbsp;
+                                            <th:block th:text="${c.getAuthor().getUsername()}"/>
+                                        </span>
+                                        <span class="d-block">
+                                            <th:block th:text="${c.getContent()}"/>
+                                        </span>
                                     </p>
                                     <div class="text-end">
                                         <small class="text-muted">
@@ -291,17 +299,24 @@
                         </div>
                     </div>
                     <div class="row pt-2">
-                        <div class="col-10 pr-0">
+                        <div class="col-11 pr-0">
                                 <textarea rows="2" class="w-100 rounded" id="textarea-comment"
                                           th:discussion="${diss.getId()}"
                                           placeholder="Enter your comment here..." required></textarea>
                         </div>
-                        <div class="col-2 text-end px-0">
+                        <div class="col-1 text-center px-0">
                             <button th:user="${user.getUsername()}" type="submit" id="btn-post"
-                                    class="btn px-3 py-1">
+                                    class="">
                                 <i class="fa fa-send"></i>&nbsp;
-                                POST
                             </button>
+                        </div>
+                    </div>
+                    <div class="row empty-comment pt-2">
+                        <div class="col-12">
+                            <div class="alert alert-warning alert-dismissible fade show py-2" role="alert">
+                                Please write a comment so you can send it.
+                                <button type="button" class="btn-sm btn-close pb-2" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -325,7 +340,7 @@
                                    th:text="${e.getTitle()}"></a>
                             </div>
                         </div>
-                        <div class="col-md-6" style="position: relative; overflow-y: scroll; height: 250px;">
+                        <div class="col-md-6" style="position: relative; overflow-y: scroll; height: 230px;">
                             <div data-bs-spy="scroll" data-bs-target="#events-list" data-bs-offset="0"
                                  class="scrollspy-example" tabindex="0">
                                 <div class="card mb-0"
@@ -389,37 +404,41 @@
 <script>
     $(document).ready(function () {
         $("#feedback").hide();
+        $(".empty-comment").hide();
 
         $("#btn-yes").click(function () {
-            let $openResponses = [];
+            let pollId = $("#send-poll").attr("pollId");
+            let username = $("#btn-post").attr("user");
+            let openResponses = [];
             $(".textarea-response").each(function () {
                 let tempObj = {
                     "id": parseInt($(this).attr("id")),
                     "response": $(this).val()
                 }
-                $openResponses.push(tempObj);
+                openResponses.push(tempObj);
             });
 
-            let $singleChoices = [];
+            let singleChoices = [];
             $(".radio-poll:checked").each(function () {
-                $singleChoices.push(parseInt($(this).val()));
+                singleChoices.push(parseInt($(this).val()));
             });
 
-            let $multipleChoices = [];
+            let multipleChoices = [];
             $(".checkbox-poll:checked").each(function () {
-                $multipleChoices.push(parseInt($(this).val()));
+                multipleChoices.push(parseInt($(this).val()));
             });
 
             let dataToGo = {
-                "open": $openResponses,
-                "single": $singleChoices,
-                "multiple": $multipleChoices
+                "username": username,
+                "open": openResponses,
+                "single": singleChoices,
+                "multiple": multipleChoices
             }
             // console.log(dataToGo);
 
             $.ajax({
                 type: "POST",
-                url: "/api/polls/fill",
+                url: "/api/polls/" + pollId + "/fill",
                 data: JSON.stringify(dataToGo),
                 contentType: "application/json",
                 success: function (response) {
@@ -433,33 +452,52 @@
         });
 
         $("#btn-post").click(function () {
-            let $comment = $("#textarea-comment").val();
-            let $discussionId = $("#textarea-comment").attr("discussion");
-            let $author = $("#btn-post").attr("user");
+            let comment = $("#textarea-comment").val();
+            if (comment !== "") {
+                let discussionId = $("#textarea-comment").attr("discussion");
+                let author = $("#btn-post").attr("user");
 
-            let dataToGo = {
-                "content": $comment,
-                "author": $author
-            };
-            // console.log(dataToGo);
+                let dataToGo = {
+                    "content": comment,
+                    "author": author
+                };
+                // console.log(dataToGo);
 
+                $.ajax({
+                    type: "POST",
+                    url: "/api/discussions/" + discussionId + "/add-comment",
+                    data: JSON.stringify(dataToGo),
+                    contentType: "application/json",
+                    success: function (response) {
+                        $("#textarea-comment").val("");
+                        fetchDiscussionComments(discussionId);
+                    },
+                    error: function (req, status, error) {
+                        console.log(req);
+                        alert("An error occurred :( Please try again!")
+                    }
+                });
+            } else {
+                $(".empty-comment").show();
+            }
+        });
+
+        $(".all-comments").on("click", ".delete-comment", function (event) {
+            let commentId = event.currentTarget.attributes.id.nodeValue;
+            console.log(commentId);
             $.ajax({
-                type: "POST",
-                url: "/api/discussions/" + $discussionId + "/add-comment",
-                data: JSON.stringify(dataToGo),
-                contentType: "application/json",
+                type: "DELETE",
+                url: "/api/comments/" + commentId + "/delete",
                 success: function (response) {
-                    $("#textarea-comment").val("");
-                    fetchDiscussionComments($discussionId);
+                    let commentCard = $(event.currentTarget).parent().parent();
+                    $(commentCard).hide();
                 },
                 error: function (req, status, error) {
                     console.log(req);
-                    alert("An error occurred :( Please try again!")
                 }
             });
 
-        });
-
+        })
     });
 
     function fetchDiscussionComments(discussionId) {
@@ -478,26 +516,33 @@
     function refreshDiscussionComments(data) {
         $(".all-comments").html("");
         for (let i = 0; i < data.length; i++) {
-            let div = $("<div>").addClass("card mb-2");
-            let headerDiv = $("<div>").addClass("card-header")
-                .append("<i class='fa fa-user'></i> &nbsp;" + data[i].author.username);
-            div.append(headerDiv);
+            let card = $("<div>").addClass("card mb-1");
+
+            let cardHeader = $("<div>").addClass("card-header text-end py-1");
+            if (data[i].author.username === $("#btn-post").attr("user")) {
+                cardHeader.append("<i class='fa fa-trash text-danger fs-5 pt-1 delete-comment' id=" + data[i].id+ "></i>");
+            }
+            card.append(cardHeader);
 
             let bodyDiv = $("<div>").addClass("card-body");
-            let textP = $("<p>").addClass("card-text").text(data[i].content);
+            let textP = $("<p>").addClass("card-text");
+            let authorSpan = $("<span>").addClass("d-block pb-2").append("<i class='fa fa-user'></i> &nbsp;" + data[i].author.username);
+            let contentSpan = $("<span>").addClass("d-block pb-2").text(data[i].content);
+            textP.append(authorSpan);
+            textP.append(contentSpan);
             bodyDiv.append(textP);
             let footerDiv = $("<div>").addClass("text-end");
             let small = $("<small>").addClass("text-muted")
 
             let splitedDate = data[i].datePosted.split("-");
-            dateAndTime = splitedDate.reverse().join("/") + " " + data[i].timePosted;
+            let dateAndTime = splitedDate.reverse().join("/") + " " + data[i].timePosted;
 
             small.text(dateAndTime);
             footerDiv.append(small);
             bodyDiv.append(footerDiv);
 
-            div.append(bodyDiv);
-            $(".all-comments").append(div);
+            card.append(bodyDiv);
+            $(".all-comments").append(card);
         }
     }
 </script>

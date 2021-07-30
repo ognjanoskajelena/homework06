@@ -7,6 +7,8 @@ import java.util.Optional;
 public interface ParticipantService {
     Optional<Participant> findById(Long id);
 
+    Optional<Participant> findByUsername(String username);
+
     Optional<Participant> participate(Long participantId, Long initiativeId);
 
     Optional<Participant> notParticipate(Long participantId, Long initiativeId);
