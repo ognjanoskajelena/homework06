@@ -6,7 +6,6 @@ import mk.ukim.finki.hci.homework06.model.PollQuestion;
 import mk.ukim.finki.hci.homework06.model.SingleChoiceQuestion;
 import mk.ukim.finki.hci.homework06.model.exception.ChoiceNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.PollNotFoundException;
-import mk.ukim.finki.hci.homework06.model.exception.PollQuestionNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.SingleChoiceQuestionRepository;
 import mk.ukim.finki.hci.homework06.service.ChoiceService;
 import mk.ukim.finki.hci.homework06.service.PollService;
@@ -65,17 +64,5 @@ public class SingleChoiceQuestionServiceImpl implements SingleChoiceQuestionServ
 
         PollQuestion singleChoiceQuestion = new SingleChoiceQuestion(content, poll.get(), choiceList);
         return Optional.of(this.singleChoiceQuestionRepository.save(singleChoiceQuestion));
-    }
-
-    @Override
-    public Optional<SingleChoiceQuestion> addChoice(Long questionId, Choice choice) {
-        Optional<PollQuestion> question = this.singleChoiceQuestionRepository.findById(questionId);
-        if(question.isEmpty())
-            throw new PollQuestionNotFoundException(questionId);
-
-        SingleChoiceQuestion choiceQuestion = (SingleChoiceQuestion) question.get();
-        choiceQuestion.addToChoices(choice);
-        // todo: check return type
-        return Optional.of(this.singleChoiceQuestionRepository.save(choiceQuestion));
     }
 }

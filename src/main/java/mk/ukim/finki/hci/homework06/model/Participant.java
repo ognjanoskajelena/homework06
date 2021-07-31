@@ -19,11 +19,6 @@ public class Participant extends User {
     @ManyToMany(mappedBy = "goingParticipants", cascade = CascadeType.REMOVE)
     private List<Event> events;
 
-    /*
-    @ManyToMany(mappedBy = "interestedParticipants", cascade = CascadeType.REMOVE)
-    private List<Webinar> webinars;
-    */
-
     @JsonIgnore
     @ManyToMany
     private List<Initiative> initiatives;

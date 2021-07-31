@@ -58,7 +58,6 @@
     margin-bottom: 5px;
 }
 .footer .widget_wrapper .widget_link ul li a {
-    text-transform: capitalize;
     color: #7a808d;
 }
 .footer .widget_wrapper .widget_link ul li a:hover,

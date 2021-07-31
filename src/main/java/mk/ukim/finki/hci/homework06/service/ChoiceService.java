@@ -11,8 +11,6 @@ public interface ChoiceService {
 
     Optional<Choice> save(String content, Long pollQuestionId);
 
-    Optional<Choice> update(Long id, String content, boolean selected);
-
     Optional<Choice> deleteById(Long id);
 
     Optional<Choice> changeSelection(Long choiceId);

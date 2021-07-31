@@ -1,6 +1,5 @@
 package mk.ukim.finki.hci.homework06.service;
 
-import mk.ukim.finki.hci.homework06.model.Choice;
 import mk.ukim.finki.hci.homework06.model.PollQuestion;
 import mk.ukim.finki.hci.homework06.model.SingleChoiceQuestion;
 
@@ -13,6 +12,4 @@ public interface SingleChoiceQuestionService {
     Optional<PollQuestion> save(String content, Long pollId);
 
     Optional<PollQuestion> save(String content, Long pollId, List<Long> choicesIds);
-
-    Optional<SingleChoiceQuestion> addChoice(Long questionId, Choice choice);
 }

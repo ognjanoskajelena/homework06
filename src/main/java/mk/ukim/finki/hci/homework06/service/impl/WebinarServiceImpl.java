@@ -1,13 +1,10 @@
 package mk.ukim.finki.hci.homework06.service.impl;
 
-import mk.ukim.finki.hci.homework06.model.Participant;
 import mk.ukim.finki.hci.homework06.model.User;
 import mk.ukim.finki.hci.homework06.model.Webinar;
 import mk.ukim.finki.hci.homework06.model.exception.InitiatorNotFoundException;
-import mk.ukim.finki.hci.homework06.model.exception.ParticipantNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.WebinarNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.WebinarRepository;
-import mk.ukim.finki.hci.homework06.service.ParticipantService;
 import mk.ukim.finki.hci.homework06.service.UserService;
 import mk.ukim.finki.hci.homework06.service.WebinarService;
 import org.springframework.stereotype.Service;
@@ -22,14 +19,10 @@ public class WebinarServiceImpl implements WebinarService {
 
     private final WebinarRepository webinarRepository;
     private final UserService userService;
-    private final ParticipantService participantService;
 
-    public WebinarServiceImpl(WebinarRepository webinarRepository,
-                              UserService userService,
-                              ParticipantService participantService) {
+    public WebinarServiceImpl(WebinarRepository webinarRepository, UserService userService) {
         this.webinarRepository = webinarRepository;
         this.userService = userService;
-        this.participantService = participantService;
     }
 
     @Override
@@ -54,22 +47,6 @@ public class WebinarServiceImpl implements WebinarService {
     }
 
     @Override
-    public Optional<Webinar> update(Long id, String topic, String description, String link, String date, String time) {
-        Optional<Webinar> webinar = this.webinarRepository.findById(id);
-        if(webinar.isPresent()) {
-            Webinar updatedWebinar = webinar.get();
-            updatedWebinar.setTopic(topic);
-            updatedWebinar.setDescription(description);
-            updatedWebinar.setLink(link);
-            updatedWebinar.setDate(LocalDate.parse(date));
-            updatedWebinar.setTime(LocalTime.parse(time));
-
-            return Optional.of(this.webinarRepository.save(updatedWebinar));
-        }
-        throw new WebinarNotFoundException(id);
-    }
-
-    @Override
     public Optional<Webinar> deleteById(Long id) {
         Optional<Webinar> webinar = this.findById(id);
         if(webinar.isPresent()) {
@@ -77,20 +54,5 @@ public class WebinarServiceImpl implements WebinarService {
             return webinar;
         }
         throw new WebinarNotFoundException(id);
-    }
-
-    @Override
-    public Optional<Webinar> interested(Long webinarId, Long participantId) {
-        Optional<Webinar> webinar = this.findById(webinarId);
-        if(webinar.isEmpty())
-            throw new WebinarNotFoundException(webinarId);
-
-        Optional<Participant> participant = this.participantService.findById(participantId);
-        if(participant.isEmpty())
-            throw new ParticipantNotFoundException(participantId);
-
-        Webinar updatedWebinar = webinar.get();
-        updatedWebinar.addToInterestedParticipants(participant.get());
-        return Optional.of(this.webinarRepository.save(updatedWebinar));
     }
 }

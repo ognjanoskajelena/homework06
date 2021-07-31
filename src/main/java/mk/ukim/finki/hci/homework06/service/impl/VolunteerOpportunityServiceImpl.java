@@ -45,19 +45,6 @@ public class VolunteerOpportunityServiceImpl implements VolunteerOpportunityServ
     }
 
     @Override
-    public Optional<VolunteerOpportunity> update(Long id, String topic, String description) {
-        Optional<VolunteerOpportunity> volunteerOpportunity = this.volunteerOpportunityRepository.findById(id);
-        if(volunteerOpportunity.isEmpty())
-            throw new VolunteerOpportunityNotFoundException(id);
-
-        VolunteerOpportunity updatedVolunteerOpportunity = volunteerOpportunity.get();
-        updatedVolunteerOpportunity.setTopic(topic);
-        updatedVolunteerOpportunity.setDescription(description);
-
-        return Optional.of(this.volunteerOpportunityRepository.save(updatedVolunteerOpportunity));
-    }
-
-    @Override
     public Optional<VolunteerOpportunity> deleteById(Long id) {
         Optional<VolunteerOpportunity> volunteerOpportunity = this.findById(id);
         if(volunteerOpportunity.isPresent()) {

@@ -3,7 +3,6 @@ package mk.ukim.finki.hci.homework06.model;
 import lombok.Data;
 import mk.ukim.finki.hci.homework06.model.enums.PollQuestionType;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 
 @Data
@@ -25,6 +24,5 @@ public class OpenQuestion extends PollQuestion {
     }
 
     public void getChoices() {
-
     }
 }

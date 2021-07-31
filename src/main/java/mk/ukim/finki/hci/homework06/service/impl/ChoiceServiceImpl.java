@@ -48,19 +48,6 @@ public class ChoiceServiceImpl implements ChoiceService {
     }
 
     @Override
-    public Optional<Choice> update(Long id, String content, boolean selected) {
-        Optional<Choice> choice = this.findById(id);
-        if(choice.isEmpty())
-            throw new ChoiceNotFoundException(id);
-
-        Choice updatedChoice = choice.get();
-        updatedChoice.setContent(content);
-        updatedChoice.setSelected(selected);
-
-        return Optional.of(this.choiceRepository.save(updatedChoice));
-    }
-
-    @Override
     public Optional<Choice> deleteById(Long id) {
         Optional<Choice> choice = this.findById(id);
         if(choice.isEmpty())

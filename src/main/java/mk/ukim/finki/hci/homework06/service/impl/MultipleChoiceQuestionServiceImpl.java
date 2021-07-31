@@ -3,7 +3,6 @@ package mk.ukim.finki.hci.homework06.service.impl;
 import mk.ukim.finki.hci.homework06.model.*;
 import mk.ukim.finki.hci.homework06.model.exception.ChoiceNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.PollNotFoundException;
-import mk.ukim.finki.hci.homework06.model.exception.PollQuestionNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.MultipleChoiceQuestionRepository;
 import mk.ukim.finki.hci.homework06.service.ChoiceService;
 import mk.ukim.finki.hci.homework06.service.MultipleChoiceQuestionService;
@@ -62,17 +61,5 @@ public class MultipleChoiceQuestionServiceImpl implements MultipleChoiceQuestion
 
         PollQuestion multipleChoiceQuestion = new MultipleChoiceQuestion(content, poll.get(), choiceList);
         return Optional.of(this.multipleChoiceQuestionRepository.save(multipleChoiceQuestion));
-    }
-
-    @Override
-    public Optional<MultipleChoiceQuestion> addChoice(Long questionId, Choice choice) {
-        Optional<PollQuestion> question = this.multipleChoiceQuestionRepository.findById(questionId);
-        if(question.isEmpty())
-            throw new PollQuestionNotFoundException(questionId);
-
-        MultipleChoiceQuestion choiceQuestion = (MultipleChoiceQuestion) question.get();
-        choiceQuestion.addToChoices(choice);
-        // todo: Check return type
-        return Optional.of(this.multipleChoiceQuestionRepository.save(choiceQuestion));
     }
 }

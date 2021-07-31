@@ -1,11 +1,9 @@
 package mk.ukim.finki.hci.homework06.service.impl;
 
-import mk.ukim.finki.hci.homework06.model.Comment;
 import mk.ukim.finki.hci.homework06.model.Discussion;
 import mk.ukim.finki.hci.homework06.model.Initiative;
 import mk.ukim.finki.hci.homework06.model.exception.DiscussionNotFoundException;
 import mk.ukim.finki.hci.homework06.model.exception.InitiativeNotFoundException;
-import mk.ukim.finki.hci.homework06.repository.CommentRepository;
 import mk.ukim.finki.hci.homework06.repository.DiscussionRepository;
 import mk.ukim.finki.hci.homework06.service.DiscussionService;
 import mk.ukim.finki.hci.homework06.service.InitiativeService;
@@ -19,14 +17,11 @@ public class DiscussionServiceImpl implements DiscussionService {
 
     private final DiscussionRepository discussionRepository;
     private final InitiativeService initiativeService;
-    private final CommentRepository commentRepository;
 
     public DiscussionServiceImpl(DiscussionRepository discussionRepository,
-                                 InitiativeService initiativeService,
-                                 CommentRepository commentRepository) {
+                                 InitiativeService initiativeService) {
         this.discussionRepository = discussionRepository;
         this.initiativeService = initiativeService;
-        this.commentRepository = commentRepository;
     }
 
     @Override
@@ -60,36 +55,11 @@ public class DiscussionServiceImpl implements DiscussionService {
     }
 
     @Override
-    public Optional<Discussion> update(Long id, String topic, String closeDate) {
-        Optional<Discussion> discussion = this.findById(id);
-        if(discussion.isEmpty())
-            throw new DiscussionNotFoundException(id);
-
-        Discussion updatedDiscussion = discussion.get();
-        updatedDiscussion.setTopic(topic);
-        updatedDiscussion.setCloseDate(LocalDate.parse(closeDate));
-
-        return Optional.of(this.discussionRepository.save(updatedDiscussion));
-    }
-
-    @Override
     public Optional<Discussion> deleteById(Long id) {
         Optional<Discussion> discussion = this.findById(id);
         if(discussion.isEmpty())
             throw new DiscussionNotFoundException(id);
         this.initiativeService.deleteById(id);
         return discussion;
-    }
-
-    @Override
-    public Optional<Discussion> addComment(Long discussionId, Comment comment) {
-        Optional<Discussion> discussion = this.findById(discussionId);
-        if(discussion.isEmpty())
-            throw new DiscussionNotFoundException(discussionId);
-
-        this.commentRepository.save(comment);
-        Discussion updatedDiscussion = discussion.get();
-        updatedDiscussion.addToComments(comment);
-        return Optional.of(this.discussionRepository.save(updatedDiscussion));
     }
 }

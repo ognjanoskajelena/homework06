@@ -35,12 +35,4 @@ public class VolunteerOpportunity {
         this.author = author;
         this.isActive = true;
     }
-
-    public VolunteerOpportunity(String topic, String description, boolean isActive, User author) {
-        this.topic = topic;
-        this.description = description;
-        this.datePosted = LocalDate.now();
-        this.isActive = isActive;
-        this.author = author;
-    }
 }

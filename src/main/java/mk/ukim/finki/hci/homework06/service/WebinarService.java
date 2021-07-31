@@ -12,9 +12,5 @@ public interface WebinarService {
 
     Optional<Webinar> save(String topic, String description, String link, String date, String time, Long initiatorId);
 
-    Optional<Webinar> update(Long id, String topic, String description, String link, String date, String time);
-
     Optional<Webinar> deleteById(Long id);
-
-    Optional<Webinar> interested(Long webinarId, Long participantId);
 }

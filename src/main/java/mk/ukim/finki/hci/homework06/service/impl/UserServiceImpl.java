@@ -1,7 +1,6 @@
 package mk.ukim.finki.hci.homework06.service.impl;
 
 import mk.ukim.finki.hci.homework06.model.User;
-import mk.ukim.finki.hci.homework06.model.exception.UserNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.UserRepository;
 import mk.ukim.finki.hci.homework06.service.UserService;
 import org.springframework.stereotype.Service;
@@ -30,15 +29,5 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> save(User user) {
         return Optional.of(this.userRepository.save(user));
-    }
-
-    @Override
-    public Optional<User> deleteByUsername(String username) {
-        Optional<User> user = this.findByUsername(username);
-        if(user.isEmpty())
-            throw new UserNotFoundException(username);
-
-        this.userRepository.delete(user.get());
-        return user;
     }
 }

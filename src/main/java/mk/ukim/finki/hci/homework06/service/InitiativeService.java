@@ -12,13 +12,5 @@ public interface InitiativeService {
 
     Optional<Initiative> save(String title, String description, Long initiatorId);
 
-    Optional<Initiative> update(Long id, String title, String description);
-
     Optional<Initiative> deleteById(Long id);
-
-    Optional<Initiative> addEvent(Long initiativeId, Event event);
-
-    Optional<Initiative> addPoll(Long initiativeId, Poll poll);
-
-    Optional<Initiative> addDiscussion(Long initiativeId, Discussion discussion);
 }

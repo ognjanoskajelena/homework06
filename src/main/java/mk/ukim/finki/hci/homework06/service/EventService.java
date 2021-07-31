@@ -15,11 +15,5 @@ public interface EventService {
 
     Optional<Event> save(Event event);
 
-    Optional<Event> update(Long id, String title, String description, String date, String time);
-
     Optional<Event> deleteById(Long id);
-
-    Optional<Event> going(Long participantId, Long eventId);
-
-    Optional<Event> notGoing(Long participantId, Long eventId);
 }
