@@ -182,7 +182,7 @@
                         </ol>
                         <div class="text-center">
                             <button type="button" class="btn px-4" id="send-poll" data-bs-toggle="modal"
-                                    data-bs-target="#confirmModal" th:pollId="${p.getId()}">
+                                    data-bs-target="#confirmModal" th:pollId="${p.getId()}" th:user="${#request.getRemoteUser()}">
                                 SEND
                             </button>
                             <div class="modal fade" id="confirmModal" tabindex="-1"
@@ -305,8 +305,7 @@
                                           placeholder="Enter your comment here..." required></textarea>
                         </div>
                         <div class="col-1 text-center px-0">
-                            <button th:user="${user.getUsername()}" type="submit" id="btn-post"
-                                    class="">
+                            <button th:user="${#request.getRemoteUser()}" type="submit" id="btn-post">
                                 <i class="fa fa-send"></i>&nbsp;
                             </button>
                         </div>
@@ -408,7 +407,7 @@
 
         $("#btn-yes").click(function () {
             let pollId = $("#send-poll").attr("pollId");
-            let username = $("#btn-post").attr("user");
+            let username = $("#send-poll").attr("user");
             let openResponses = [];
             $(".textarea-response").each(function () {
                 let tempObj = {
@@ -434,7 +433,7 @@
                 "single": singleChoices,
                 "multiple": multipleChoices
             }
-            // console.log(dataToGo);
+            //console.log(dataToGo);
 
             $.ajax({
                 type: "POST",
