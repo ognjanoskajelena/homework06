@@ -14,7 +14,7 @@
 
 .registration-form .form-icon {
     text-align: center;
-    background-color: #b4cde4ff;
+    background-color: rgba(13, 24, 33, 1);
     border-radius: 50%;
     font-size: 40px;
     color: white;
@@ -29,7 +29,7 @@
     border-radius: 8px;
     margin-bottom: 25px;
     padding: 10px 20px;
-    border-color: #b4cded;
+    border-color: rgba(52, 73, 102, 1);;
 }
 
 .registration-form .login {
@@ -50,7 +50,7 @@
     max-width: 750px;
     background-color: #fff;
     margin: auto;
-    padding: 35px 0;
+    padding: 30px 0;
     text-align: center;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
@@ -70,15 +70,6 @@
     border-color: #0d1821ff;
 }
 
-@media (max-width: 576px) {
-    .registration-form form {
-        padding: 50px 20px;
-    }
-
-    .registration-form .form-icon {
-        width: 70px;
-        height: 70px;
-        font-size: 30px;
-        line-height: 70px;
-    }
+.required-login-fields, .required-register-fields {
+    display: none;
 }

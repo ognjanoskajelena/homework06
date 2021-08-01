@@ -2,7 +2,7 @@
     margin: 0;
     background-size: cover;
     background: url("../img/protest.png") no-repeat center fixed;
-    color: #fff!important;
+    color: #fff !important;
     height: 300px;
     position: relative;
     box-shadow: inset 0 0 20px rgba(0, 0, 0, .1);
@@ -20,9 +20,11 @@
     border: none;
     margin-bottom: 30px;
 }
+
 #jumbotron-header .has-shadow {
     box-shadow: 0 1px 15px 1px rgba(52, 40, 104, .08);
 }
+
 #jumbotron-header .head-profile:before {
     content: "";
     background: rgba(255, 255, 255, .6);
@@ -35,6 +37,7 @@
     margin: 0 auto;
     border-radius: 4px 4px 0 0;
 }
+
 #jumbotron-header .head-profile:after {
     content: "";
     background: rgba(255, 255, 255, .3);
@@ -47,6 +50,7 @@
     margin: 0 auto;
     border-radius: 4px 4px 0 0;
 }
+
 #jumbotron-header .widget-body {
     padding: 1rem 1.4rem;
 }
@@ -57,12 +61,14 @@
     margin-bottom: 1rem;
     line-height: 1.8rem;
 }
+
 #jumbotron-header h2 {
     color: #0d1821ff;
     font-size: 1.6rem;
     font-weight: 600;
     margin-bottom: .2rem;
 }
+
 #jumbotron-header .location {
     margin-top: 3%;
     color: #344966ff;
@@ -95,16 +101,19 @@
 #jumbotron-header .head-profile li:first-child {
     padding-left: 0;
 }
+
 #jumbotron-header .head-profile li {
     display: inline-block;
     text-align: center;
     padding: 0 1rem;
 }
+
 #jumbotron-header .head-profile li .counter {
     color: #0d1821ff;
     font-size: 1.2rem;
     font-weight: 600;
 }
+
 #jumbotron-header .head-profile li .heading {
     color: #344966ff;
     font-size: 1rem;

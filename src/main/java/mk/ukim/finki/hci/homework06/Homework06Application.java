@@ -52,9 +52,6 @@ public class Homework06Application {
         Initiative saveTheEnvironment = new Initiative("Save the environment while being active", "This initiative focuses on our and earth's health. Therefore, we need to raise the awareness for how beneficial riding bicycles can be. Join us on our mission in saving the planet and staying in physical health.",
                 jenna);
         initiativeRepository.save(saveTheEnvironment);
-//        Initiative stopForPlasticBags = new Initiative("Stop for plastic bags!", "Modern needs require modern alternatives. Not just that we do not do no good to our planet with (this) extensive use of plastic bags, we do enormous bad. Everyone who thinks alike will contribute so much with any ideas, everyone who does not, can participate to give us a chance to change that way of thinking.",
-//                john);
-//        initiativeRepository.save(stopForPlasticBags);
         Initiative landfillProblem = new Initiative("Landfill problem in Banjica", "The problem with the Rusino landfill is just getting worse. Polluting our food, air and water, this needs to be solved as fast as possible. And we can't let the control out of our hands. No one cares more about our families and friends than we do ourselves.",
                 jenna);
         initiativeRepository.save(landfillProblem);
@@ -237,8 +234,13 @@ public class Homework06Application {
         event.close();
         eventRepository.save(event);
 
-        event = new Event("Last consultations before the municipality meeting",
+        event = new Event("Consultations before the next municipality meeting",
                 "Event that will cover the last legal - related concerns before the municipality meeting. Also, there will be another voting related with the incoming meeting.",
+                LocalDate.parse("2021-11-20"), LocalTime.parse("14:00:00"), childrenPark);
+        eventRepository.save(event);
+
+        event = new Event("Meeting with a regional TV company",
+                "Event that will help this problem to be better known in the community, so the people will be more aware of every aspect related to it.",
                 LocalDate.parse("2021-07-20"), LocalTime.parse("14:00:00"), childrenPark);
         event.close();
         eventRepository.save(event);

@@ -8,14 +8,14 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <input type="text" class="form-control item" name="name" id="name" placeholder="Enter your name"
-                               required>
+                               required oninvalid="registerValidation()">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <input type="text" class="form-control item" name="surname" id="surname"
                                placeholder="Enter your surname"
-                               required>
+                               required oninvalid="registerValidation()">
                     </div>
                 </div>
             </div>
@@ -24,14 +24,14 @@
                     <div class="form-group">
                         <input type="text" class="form-control item" name="username" id="username"
                                placeholder="Enter your username"
-                               required>
+                               required oninvalid="registerValidation()">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <input type="text" class="form-control item" name="email" id="email"
                                placeholder="Enter your email"
-                               required>
+                               required oninvalid="registerValidation()">
                     </div>
                 </div>
             </div>
@@ -40,21 +40,21 @@
                     <div class="form-group">
                         <input type="password" class="form-control item" name="password" id="password"
                                placeholder="Enter your password"
-                               required>
+                               required oninvalid="registerValidation()">
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="password" class="form-control item" name="repeatedPassword" id="repeatedPassword"
-                               placeholder="Reenter your password" required>
+                        <input type="text" onfocus="(this.type='date')" class="form-control item" name="birthDate" id="birthDate"
+                               placeholder="Enter your date of birth" required oninvalid="registerValidation()">
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <input type="text" onfocus="(this.type='date')" class="form-control item" name="birthDate" id="birthDate"
-                               placeholder="Enter your date of birth" required>
+                        <input type="password" class="form-control item" name="repeatedPassword" id="repeatedPassword"
+                               placeholder="Confirm your password" required oninvalid="registerValidation()">
                     </div>
                 </div>
             </div>
@@ -70,6 +70,14 @@
                         </div>
                     </div>
                 </th:block>
+                <div class="alert alert-danger py-1 mt-4 required-register-fields" role="alert">
+                    <div>
+                        <i class="fa fa-warning"></i>&nbsp;
+                        <span>
+                                All of the fields are required!
+                        </span>
+                    </div>
+                </div>
             </div>
         </form>
         <div class="additional">
@@ -82,3 +90,6 @@
         </div>
     </div>
 </div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="/js/authentication.js"></script>

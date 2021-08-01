@@ -18,7 +18,7 @@ public class LoginController {
         }
         model.addAttribute("headTitle", "Login Page");
         model.addAttribute("style1", "header.css");
-        model.addAttribute("style2", "login.css");
+        model.addAttribute("style2", "authentication.css");
         model.addAttribute("style3", "footer.css");
         model.addAttribute("bodyContent", "login");
         return "master-template";
