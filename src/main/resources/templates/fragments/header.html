@@ -80,10 +80,7 @@
         </div>
     </div>
     <div class="px-3 py-2 ">
-        <div class="container d-flex flex-wrap justify-content-center">
-            <form class="col-12 col-lg-auto mb-2 mb-lg-0 me-lg-auto">
-                <!-- todo -->
-            </form>
+        <div class="container d-flex flex-wrap justify-content-end">
             <div th:if="${#request.getRemoteUser() == null}" class="text-end">
                 <a href="/login" type="button" class="btn btn-light text-dark border">Login</a>
                 <a href="/register" type="button" class="btn btn-signup">Sign Up</a>

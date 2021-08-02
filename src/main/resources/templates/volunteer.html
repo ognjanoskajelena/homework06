@@ -43,7 +43,8 @@
                 </div>
             </div>
         </div>
-        <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel" aria-hidden="true">
+        <div class="modal fade" id="feedbackModal" tabindex="-1" aria-labelledby="feedbackModalLabel"
+             aria-hidden="true">
             <div class="modal-dialog  modal-dialog-centered">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -54,8 +55,10 @@
                     </div>
                     <div class="modal-body">
                         Dear
-                        <b><th:block th:if="${#request.getRemoteUser() != null}"
-                                     th:text="${#request.getRemoteUser()}"/></b>, if you agree we will send you more
+                        <b>
+                            <th:block th:if="${#request.getRemoteUser() != null}"
+                                      th:text="${#request.getRemoteUser()}"/>
+                        </b>, if you agree we will send you more
                         information on your email address on this matter, and continue the collaboration via email.
                         <span class="d-inline-block pt-2">Are you sure you want to engage in this opportunity?</span>
                     </div>
