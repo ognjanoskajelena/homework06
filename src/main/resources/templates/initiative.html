@@ -15,11 +15,11 @@
                                 </ul>
                             </div>
                             <div class="col-xl-4 col-md-4 d-flex justify-content-center">
-                                <div class="infos">
+                                <div class="headings">
                                     <h2>
                                         <th:block th:text="${initiative.getTitle()}"/>
                                     </h2>
-                                    <div class="location">
+                                    <div class="subheading">
                                         Opened on:
                                         <b>
                                             <th:block
@@ -82,7 +82,7 @@
             <div class="row">
                 <div class="col-12">
                     <p class="py-1 px-3 fs-5 text-end initiator-paragraph">
-                        Initiator |
+                        Initiator:
                         <b>
                             <th:block
                                     th:text="${initiative.getInitiator().getName() + ' ' + initiative.getInitiator().getSurname()}"/>
@@ -109,7 +109,7 @@
                                    th:text="${poll.getTopic()}"></a>
                             </div>
                         </div>
-                        <div class="col-md-6" style="position: relative; overflow-y: scroll; height: 200px;">
+                        <div class="col-md-6" id="polls-scroll" style="position: relative; overflow-y: scroll; height: 200px;">
                             <div data-bs-spy="scroll" data-bs-target="#polls-list" data-bs-offset="0"
                                  class="scrollspy-example" tabindex="0">
                                 <div class="card mb-0"
@@ -222,7 +222,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-12">
-                            <h5 class="py-4 px-2 fs-4 fw-bold">RECENT DISCUSSIONS</h5>
+                            <h5 class="py-3 px-2 fs-4 fw-bold">RECENT DISCUSSIONS</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -235,7 +235,7 @@
                                    th:text="${d.getTopic()}"></a>
                             </div>
                         </div>
-                        <div class="col-md-6" style="position: relative; overflow-y: scroll; height: 185px;">
+                        <div class="col-md-6" id="discussions-scroll">
                             <div data-bs-spy="scroll" data-bs-target="#discussions-list" data-bs-offset="0"
                                  class="scrollspy-example" tabindex="0">
                                 <div class="card mb-0"
@@ -260,13 +260,13 @@
                     <div class="row">
                         <div class="col-12">
                             <div>
-                                <h4 class="pb-3 px-2 fs-4">
+                                <h4 class="py-3 px-2 fs-4">
                                     <th:block th:text="${diss.getTopic()}"/>
                                 </h4>
                             </div>
                         </div>
                     </div>
-                    <div class="row" style="position: relative; overflow-y: scroll; height: 500px;">
+                    <div class="row" id="active-discussion-scroll">
                         <div data-bs-spy="scroll" data-bs-target="#list-example" data-bs-offset="0"
                              class="all-comments scrollspy-example col-12" tabindex="0">
                             <div th:each="c : ${diss.getComments()}" class="card mb-1">
@@ -329,7 +329,7 @@
                 <div class="col-md-6">
                     <div class="row">
                         <div class="col-12">
-                            <h5 class="py-4 px-2 fs-4 fw-bold">RECENT EVENTS</h5>
+                            <h5 class="py-3 px-2 fs-4 fw-bold">RECENT EVENTS</h5>
                         </div>
                     </div>
                     <div class="row">
@@ -342,7 +342,7 @@
                                    th:text="${e.getTitle()}"></a>
                             </div>
                         </div>
-                        <div class="col-md-6" style="position: relative; overflow-y: scroll; height: 230px;">
+                        <div class="col-md-6" id="events-scroll">
                             <div data-bs-spy="scroll" data-bs-target="#events-list" data-bs-offset="0"
                                  class="scrollspy-example" tabindex="0">
                                 <div class="card mb-0"
@@ -365,10 +365,10 @@
                     </div>
                 </div>
                 <div class="col-md-6 px-2" id="latest-event">
-                    <div class="pt-4 pb-1 px-2"
+                    <div class="px-2"
                          th:each="event : ${initiative.getEvents()}"
                          th:if="${!event.isClosed()}">
-                        <h5 class="pt-1 pb-3 px-2 fs-4">Latest event</h5>
+                        <h5 class="py-3 px-2 fs-4">Latest event</h5>
                         <div class="card mb-2">
                             <div class="card-header pt-3">
                                 <th:block th:text="${event.getTitle()}"/>
@@ -385,11 +385,11 @@
                                 </p>
                                 <div class="text-end text-muted">
                                     <small>Scheduled for: </small>
-                                    <small>
+                                    <small class="fw-bold">
                                         <th:block
                                                 th:text="${event.getDate().getMonth() + ' ' + event.getDate().getDayOfMonth() + ', ' + event.getDate().getYear()}"/>
                                     </small>
-                                    <small>
+                                    <small class="fw-bold">
                                         <th:block th:text="${event.getTime()}"/>
                                     </small>
                                 </div>

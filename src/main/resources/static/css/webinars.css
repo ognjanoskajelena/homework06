@@ -20,11 +20,11 @@
 
 #webinars .webinar-box .box-content h5 {
     color: #0d1821ff;
-    font-weight: 600;
 }
 
 #webinars .webinar-box .box-content p {
     color: #0d1821ff;
+    font-size: 2.25vh;
 }
 
 #webinars .webinar-box span a {

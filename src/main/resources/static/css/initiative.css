@@ -17,6 +17,18 @@
     background: rgba(240, 244, 239, 1);
 }
 
+#initiative-details #polls-scroll, #initiative-details #discussions-scroll, #initiative-details #events-scroll{
+    position: relative;
+    overflow-y: scroll;
+    height: 230px;
+}
+
+#initiative-details #active-discussion #active-discussion-scroll{
+    position: relative;
+    overflow-y: scroll;
+    height: 500px;
+}
+
 #initiative-details #polls .closed-poll {
     background: rgba(180, 205, 228, 0.2);
 }

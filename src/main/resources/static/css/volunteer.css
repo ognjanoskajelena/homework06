@@ -20,11 +20,11 @@
 
 #volunteer-opportunities .opportunity-box .box-content h4 {
     color: #0d1821ff;
-    font-weight: 600;
 }
 
 #volunteer-opportunities .opportunity-box .box-content p {
     color: #0d1821ff;
+    font-size: 2.25vh;
 }
 
 #volunteer-opportunities .opportunity-box:after {

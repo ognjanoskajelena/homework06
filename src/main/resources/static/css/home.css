@@ -4,20 +4,20 @@
 
 #about-us .custom-heading {
     color: #0d1821ff;
-    font-size: 4vh;
+    font-size: 4.5vh;
 }
 
 #about-us .mission-section .custom-sub-heading {
     color: #344966ff;
-    font-weight: 700;
+    font-size: 3vh;
+}
+
+#about-us .mission-section .custom-para {
+    font-size: 2.2vh;
 }
 
 #about-us .links h6 a {
     color: #0d1821ff;
     text-decoration: none;
     font-size: 2.2vh;
-}
-
-#about-us .links h6 a:hover {
-    color: #b4cded;
 }
