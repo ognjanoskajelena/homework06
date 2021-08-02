@@ -40,10 +40,6 @@ public class Discussion {
         this.initiative = initiative;
     }
 
-    public void addToComments(Comment comment) {
-        this.comments.add(comment);
-    }
-
     public void close() {
         this.isOpen = false;
     }

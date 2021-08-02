@@ -54,16 +54,4 @@ public class Initiative {
         this.discussions = new ArrayList<>();
         this.participants = new ArrayList<>();
     }
-
-    public void addToEvents(Event event) {
-        this.events.add(event);
-    }
-
-    public void addToPolls(Poll poll) {
-        this.polls.add(poll);
-    }
-
-    public void addToDiscussions(Discussion discussion) {
-        this.discussions.add(discussion);
-    }
 }

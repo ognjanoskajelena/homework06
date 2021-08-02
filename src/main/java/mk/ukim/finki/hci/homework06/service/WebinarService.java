@@ -11,6 +11,4 @@ public interface WebinarService {
     List<Webinar> findAll();
 
     Optional<Webinar> save(String topic, String description, String link, String date, String time, Long initiatorId);
-
-    Optional<Webinar> deleteById(Long id);
 }

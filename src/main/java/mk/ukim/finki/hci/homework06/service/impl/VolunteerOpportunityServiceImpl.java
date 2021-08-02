@@ -3,7 +3,6 @@ package mk.ukim.finki.hci.homework06.service.impl;
 import mk.ukim.finki.hci.homework06.model.User;
 import mk.ukim.finki.hci.homework06.model.VolunteerOpportunity;
 import mk.ukim.finki.hci.homework06.model.exception.AdministratorNotFoundException;
-import mk.ukim.finki.hci.homework06.model.exception.VolunteerOpportunityNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.VolunteerOpportunityRepository;
 import mk.ukim.finki.hci.homework06.service.UserService;
 import mk.ukim.finki.hci.homework06.service.VolunteerOpportunityService;
@@ -42,15 +41,5 @@ public class VolunteerOpportunityServiceImpl implements VolunteerOpportunityServ
 
         VolunteerOpportunity volunteerOpportunity = new VolunteerOpportunity(topic, description, administrator.get());
         return Optional.of(this.volunteerOpportunityRepository.save(volunteerOpportunity));
-    }
-
-    @Override
-    public Optional<VolunteerOpportunity> deleteById(Long id) {
-        Optional<VolunteerOpportunity> volunteerOpportunity = this.findById(id);
-        if(volunteerOpportunity.isPresent()) {
-            this.volunteerOpportunityRepository.deleteById(id);
-            return volunteerOpportunity;
-        }
-        throw new VolunteerOpportunityNotFoundException(id);
     }
 }

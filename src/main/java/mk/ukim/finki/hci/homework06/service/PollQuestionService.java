@@ -8,6 +8,4 @@ public interface PollQuestionService {
     Optional<PollQuestion> findById(Long id);
 
     Optional<PollQuestion> save(PollQuestion question);
-
-    Optional<PollQuestion> deleteById(Long id);
 }

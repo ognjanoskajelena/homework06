@@ -26,9 +26,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/home", "/register", "/initiatives", "/webinars", "/volunteer",
                         "/assets/**", "/css/**", "/img/**", "/js/**").permitAll()
-                .antMatchers("/h2/**").hasRole("ADMIN")
-                .anyRequest()
-                .authenticated()
                 .and()
                 .formLogin()
                 .loginPage("/login").permitAll()
@@ -43,7 +40,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login")
                 .and()
                 .exceptionHandling().accessDeniedPage("/access-denied");
-
     }
 
     @Override
@@ -52,10 +48,6 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .withUser("jelena.o")
                 .password(this.passwordEncoder.encode("jo"))
                 .authorities("ROLE_PARTICIPANT")
-                .and()
-                .withUser("admin.a")
-                .password(this.passwordEncoder.encode("aa"))
-                .authorities("ROLE_ADMIN")
                 .and()
                 .withUser("test")
                 .password(this.passwordEncoder.encode("tt"))

@@ -9,8 +9,4 @@ public interface InitiativeService {
     List<Initiative> findAll();
 
     Optional<Initiative> findById(Long id);
-
-    Optional<Initiative> save(String title, String description, Long initiatorId);
-
-    Optional<Initiative> deleteById(Long id);
 }

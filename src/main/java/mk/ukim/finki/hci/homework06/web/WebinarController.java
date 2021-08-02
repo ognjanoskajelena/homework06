@@ -8,11 +8,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
 @RequestMapping("/webinars")
-public class WebinarsController {
+public class WebinarController {
 
     private final WebinarService webinarService;
 
-    public WebinarsController(WebinarService webinarService) {
+    public WebinarController(WebinarService webinarService) {
         this.webinarService = webinarService;
     }
 

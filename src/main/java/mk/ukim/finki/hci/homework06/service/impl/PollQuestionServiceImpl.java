@@ -1,7 +1,6 @@
 package mk.ukim.finki.hci.homework06.service.impl;
 
 import mk.ukim.finki.hci.homework06.model.PollQuestion;
-import mk.ukim.finki.hci.homework06.model.exception.PollQuestionNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.PollQuestionRepository;
 import mk.ukim.finki.hci.homework06.service.PollQuestionService;
 import org.springframework.stereotype.Service;
@@ -25,15 +24,5 @@ public class PollQuestionServiceImpl implements PollQuestionService {
     @Override
     public Optional<PollQuestion> save(PollQuestion question) {
         return Optional.of(this.pollQuestionRepository.save(question));
-    }
-
-    @Override
-    public Optional<PollQuestion> deleteById(Long id) {
-        Optional<PollQuestion> pollQuestion = this.findById(id);
-        if(pollQuestion.isPresent()) {
-            this.pollQuestionRepository.deleteById(id);
-            return pollQuestion;
-        }
-        throw new PollQuestionNotFoundException(id);
     }
 }

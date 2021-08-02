@@ -11,6 +11,4 @@ public interface VolunteerOpportunityService {
     List<VolunteerOpportunity> findAll();
 
     Optional<VolunteerOpportunity> save(String topic, String description, Long authorId);
-
-    Optional<VolunteerOpportunity> deleteById(Long id);
 }

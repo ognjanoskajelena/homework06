@@ -10,6 +10,4 @@ public interface MultipleChoiceQuestionService {
     Optional<MultipleChoiceQuestion> findById(Long id);
 
     Optional<PollQuestion> save(String content, Long pollId);
-
-    Optional<PollQuestion> save(String content, Long pollId, List<Long> choicesIds);
 }

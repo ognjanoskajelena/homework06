@@ -63,6 +63,7 @@ public class Homework06Application {
         testParticipant.addToInitiatives(childrenPark);
         participantRepository.save(testParticipant);
 
+        // Polls
         PollRepository pollRepository = configurableApplicationContext
                 .getBean(PollRepository.class);
         Poll pollForLandfillProblem = new Poll("Progress and protest day", true, landfillProblem);
@@ -74,7 +75,7 @@ public class Homework06Application {
         Poll pollForChildrenPark = new Poll("New municipality meeting", true, childrenPark);
         pollRepository.save(pollForChildrenPark);
 
-        //Open question
+        // Open questions
         OpenQuestionRepository openQuestionRepository = configurableApplicationContext
                 .getBean(OpenQuestionRepository.class);
         PollQuestion openQuestion = new OpenQuestion("Is the course of this initiative going in the right direction so far?", pollForLandfillProblem);
@@ -84,7 +85,7 @@ public class Homework06Application {
         PollQuestion openQuestion2 = new OpenQuestion("Do you think that the course of this initiative is going in the right direction?", pollForChildrenPark);
         openQuestionRepository.save(openQuestion2);
 
-        //Single choice question
+        // Single choice questions
         SingleChoiceQuestionRepository singleChoiceQuestionRepo =
                 configurableApplicationContext.getBean(SingleChoiceQuestionRepository.class);
         PollQuestion singleChoiceQuestion = new SingleChoiceQuestion("Do you think now is the right time to go with a protest?", pollForLandfillProblem);
@@ -94,7 +95,7 @@ public class Homework06Application {
         PollQuestion singleChoiceQuestion2 = new SingleChoiceQuestion("Do you think that we should ask for another municipality meeting this month?", pollForChildrenPark);
         singleChoiceQuestionRepo.save(singleChoiceQuestion2);
 
-        //Multiple choice question
+        // Multiple choice questions
         MultipleChoiceQuestionRepository multipleChoiceQuestionRepo =
                 configurableApplicationContext.getBean(MultipleChoiceQuestionRepository.class);
         PollQuestion multipleChoiceQuestion = new MultipleChoiceQuestion("Potential date of the next protest:", pollForLandfillProblem);
@@ -104,7 +105,7 @@ public class Homework06Application {
         PollQuestion multipleChoiceQuestion2 = new MultipleChoiceQuestion("Potential date of the meeting:", pollForChildrenPark);
         multipleChoiceQuestionRepo.save(multipleChoiceQuestion2);
 
-        //Closed polls
+        // Closed polls
         Poll closedPoll = new Poll("First steps", false, landfillProblem);
         pollRepository.save(closedPoll);
         closedPoll = new Poll("Further notice", false, landfillProblem);
@@ -124,7 +125,7 @@ public class Homework06Application {
         closedPoll = new Poll("Your opinions", false, childrenPark);
         pollRepository.save(closedPoll);
 
-        //Choices
+        // Choices
         ChoiceRepository choiceRepository = configurableApplicationContext.getBean(ChoiceRepository.class);
         Choice choice = new Choice("Yes", false, singleChoiceQuestion);
         choiceRepository.save(choice);
@@ -162,7 +163,7 @@ public class Homework06Application {
         choice = new Choice("September 25, 2021", false, multipleChoiceQuestion2);
         choiceRepository.save(choice);
 
-        //Webinars
+        // Webinars
         WebinarRepository webinarRepository = configurableApplicationContext
                 .getBean(WebinarRepository.class);
         Webinar webinar = new Webinar("Initial interest for ecological action in our city park",
@@ -175,7 +176,7 @@ public class Homework06Application {
                 "https://web.zoom.us/some34zoom7723meeting0098linkKJFKW=example", LocalDate.parse("2021-09-22"), LocalTime.parse("20:00:00"), jenna);
         webinarRepository.save(webinar);
 
-        //Discussions
+        // Discussions
         DiscussionRepository discussionRepository = configurableApplicationContext.getBean(DiscussionRepository.class);
 
         Discussion discussion = new Discussion("Air polluting concerns", LocalDate.parse("2021-07-08"), landfillProblem);
@@ -197,7 +198,7 @@ public class Homework06Application {
         discussion2 = new Discussion("Latest concerns on the meeting", LocalDate.parse("2021-10-08"), childrenPark);
         discussionRepository.save(discussion2);
 
-        //Comments
+        // Comments
         CommentRepository commentRepository = configurableApplicationContext.getBean(CommentRepository.class);
         Comment comment = new Comment("I think that we need more qualified lawyers, because they are trying to avoid all the bad circumstances.", jelena, discussion);
         commentRepository.save(comment);
@@ -210,7 +211,7 @@ public class Homework06Application {
         comment = new Comment("I think that our neighborhood really needs this.", test, discussion2);
         commentRepository.save(comment);
 
-        //Events
+        // Events
         EventRepository eventRepository = configurableApplicationContext.getBean(EventRepository.class);
         Event event = new Event("Protest for landfill Rusino",
                 "The problem with the Rusino landfill is just getting worse. Polluting our food, air and water, this needs to be solved as fast as possible. And we can't let the control out of our hands.",
@@ -245,7 +246,7 @@ public class Homework06Application {
         event.close();
         eventRepository.save(event);
 
-        //Volunteer opportunities
+        // Volunteer opportunities
         VolunteerOpportunityRepository volunteerOpportunityRepository = configurableApplicationContext
                 .getBean(VolunteerOpportunityRepository.class);
         VolunteerOpportunity volunteerOpportunity = new VolunteerOpportunity("Donation of school reads for first, second, third and fourth graders",

@@ -3,7 +3,6 @@ package mk.ukim.finki.hci.homework06.service.impl;
 import mk.ukim.finki.hci.homework06.model.User;
 import mk.ukim.finki.hci.homework06.model.Webinar;
 import mk.ukim.finki.hci.homework06.model.exception.InitiatorNotFoundException;
-import mk.ukim.finki.hci.homework06.model.exception.WebinarNotFoundException;
 import mk.ukim.finki.hci.homework06.repository.WebinarRepository;
 import mk.ukim.finki.hci.homework06.service.UserService;
 import mk.ukim.finki.hci.homework06.service.WebinarService;
@@ -44,15 +43,5 @@ public class WebinarServiceImpl implements WebinarService {
             return Optional.of(this.webinarRepository.save(webinar));
         }
         throw new InitiatorNotFoundException(initiatorId);
-    }
-
-    @Override
-    public Optional<Webinar> deleteById(Long id) {
-        Optional<Webinar> webinar = this.findById(id);
-        if(webinar.isPresent()) {
-            this.webinarRepository.deleteById(id);
-            return webinar;
-        }
-        throw new WebinarNotFoundException(id);
     }
 }

@@ -60,8 +60,4 @@ public class Poll {
     public void addToParticipants(Participant participant) {
         this.participants.add(participant);
     }
-
-    public void addToQuestions(PollQuestion pollQuestion) {
-        this.questions.add(pollQuestion);
-    }
 }

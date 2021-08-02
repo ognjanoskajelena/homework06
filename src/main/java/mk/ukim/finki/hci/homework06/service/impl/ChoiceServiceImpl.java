@@ -28,16 +28,6 @@ public class ChoiceServiceImpl implements ChoiceService {
     }
 
     @Override
-    public Optional<Choice> save(String content, boolean selected, Long pollQuestionId) {
-        Optional<PollQuestion> pollQuestion = this.pollQuestionService.findById(pollQuestionId);
-        if(pollQuestion.isEmpty())
-            throw new PollQuestionNotFoundException(pollQuestionId);
-
-        Choice choice = new Choice(content, selected, pollQuestion.get());
-        return Optional.of(this.choiceRepository.save(choice));
-    }
-
-    @Override
     public Optional<Choice> save(String content, Long pollQuestionId) {
         Optional<PollQuestion> pollQuestion = this.pollQuestionService.findById(pollQuestionId);
         if(pollQuestion.isEmpty())
@@ -45,15 +35,6 @@ public class ChoiceServiceImpl implements ChoiceService {
 
         Choice choice = new Choice(content, pollQuestion.get());
         return Optional.of(this.choiceRepository.save(choice));
-    }
-
-    @Override
-    public Optional<Choice> deleteById(Long id) {
-        Optional<Choice> choice = this.findById(id);
-        if(choice.isEmpty())
-            throw new ChoiceNotFoundException(id);
-        this.choiceRepository.deleteById(id);
-        return choice;
     }
 
     @Override
