@@ -25,7 +25,7 @@
 </svg>
 
 <header>
-    <div class="px-3 py-2 bg-transparent">
+    <div class="px-3 pt-2 pb-5 bg-transparent">
         <div class="container">
             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
                 <a href="/home"
@@ -75,20 +75,15 @@
                             DASHBOARD
                         </a>
                     </li>
+                    <li class="pt-3 border-start" th:if="${#request.getRemoteUser() == null}">
+                        <a href="/login" type="button" class="btn border login">Login</a>
+                    </li>
+                    <li class="pt-3 border-start" th:if="${#request.getRemoteUser() != null}">
+                        <a href="/logout" type="button" class="btn btn-light border logout">
+                            Logout
+                        </a>
+                    </li>
                 </ul>
-            </div>
-        </div>
-    </div>
-    <div class="px-3 py-2 ">
-        <div class="container d-flex flex-wrap justify-content-end">
-            <div th:if="${#request.getRemoteUser() == null}" class="text-end">
-                <a href="/login" type="button" class="btn btn-light text-dark border">Login</a>
-                <a href="/register" type="button" class="btn btn-signup">Sign Up</a>
-            </div>
-            <div th:if="${#request.getRemoteUser() != null}" class="text-end">
-                <a href="/logout" type="button" class="btn logout">
-                    Logout
-                </a>
             </div>
         </div>
     </div>

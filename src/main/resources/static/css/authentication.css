@@ -3,16 +3,17 @@
     margin: 50px 0 50px 0;
 }
 
-.registration-form form {
-    max-width: 750px;
+.registration-form .form {
+    max-width: 700px;
     margin: auto;
-    padding: 60px 90px;
-    border-top-left-radius: 12px;
-    border-top-right-radius: 12px;
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+    padding: 55px 75px;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+    background: linear-gradient(180deg, #C3D7E9, #D3E2EE, #E1EBF4, #F0F5F9);
 }
 
-.registration-form .form-icon {
+.registration-form .form .form-icon {
     text-align: center;
     background-color: rgba(13, 24, 33, 1);
     border-radius: 50%;
@@ -24,15 +25,15 @@
     line-height: 100px;
 }
 
-.registration-form .item {
+.registration-form .form .item {
     background: white;
     border-radius: 8px;
     margin-bottom: 25px;
     padding: 10px 20px;
-    border-color: rgba(52, 73, 102, 1);;
+    border-color: rgba(52, 73, 102, 1);
 }
 
-.registration-form .login {
+.registration-form .form .login {
     border-radius: 6px;
     padding: 8px 18px;
     font-size: 16px;
@@ -42,20 +43,19 @@
     margin-top: 20px;
 }
 
-.registration-form .login:hover {
+.registration-form .form .login:hover {
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.15);
 }
 
 .registration-form .additional {
-    max-width: 750px;
-    background-color: #fff;
+    max-width: 700px;
     margin: auto;
     padding: 30px 0;
     text-align: center;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    color: #9fadca;
-    border-top: 2px solid rgba(180, 205, 228, 0.5);
+    color: rgba(0, 0, 0, 0.6);
+    border-top: 2px solid rgba(180, 205, 228, 0.35);
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
 }
 
@@ -64,12 +64,23 @@
     padding: 8px 18px;
     font-size: 16px;
     font-weight: bold;
-    background-color: white;
     color: #0d1821ff;
+    background: white;
     margin-top: 20px;
     border-color: #0d1821ff;
 }
 
-.required-login-fields, .required-register-fields {
+.registration-form .additional button {
+    border-radius: 6px;
+    padding: 8px 18px;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    background: #0d1821ff;
+    margin-top: 20px;
+    border-color: #0d1821ff;
+}
+
+.registration-form .form .required-login-fields, .required-register-fields {
     display: none;
 }

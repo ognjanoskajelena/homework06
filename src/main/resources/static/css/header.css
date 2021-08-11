@@ -1,3 +1,7 @@
+header ul {
+    margin-right: 2%;
+}
+
 header .nav-link {
     color: #0d1821ff;
     font-size: 2.35vh;
@@ -14,19 +18,17 @@ header .nav-link:active {
     color: #344966ff;
 }
 
-header .text-end .btn-signup {
-    background-color: #344966ff;
+header .login {
+    background: #344966ff;
+    color: white;
+    margin-left: 40%;
+}
+
+header .login:hover {
+    background: #456187;
     color: white;
 }
 
 header .logout {
-    background: #344966ff;
-    color: white;
-}
-
-header .logout:hover {
-    background: white;
-    color: #0d1821ff;
-    border: 1px solid #344966ff;
-    font-weight: 600;
+    margin-left: 35%;
 }

@@ -1,94 +1,92 @@
 <div class="container">
     <div class="registration-form">
         <form method="post" action="/register">
-            <div class="form-icon">
-                <span><i class="fa fa-user"></i></span>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control item" name="name" id="name" placeholder="Enter your name"
-                               required oninvalid="registerValidation()">
+            <div class="form">
+                <div class="form-icon">
+                    <span><i class="fa fa-user"></i></span>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control item" name="name" id="name" placeholder="Enter your name"
+                                   required oninvalid="registerValidation()">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control item" name="username" id="username"
+                                   placeholder="Enter your username"
+                                   required oninvalid="registerValidation()">
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control item" name="surname" id="surname"
-                               placeholder="Enter your surname"
-                               required oninvalid="registerValidation()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control item" name="surname" id="surname"
+                                   placeholder="Enter your surname"
+                                   required oninvalid="registerValidation()">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+
+                            <input type="password" class="form-control item" name="password" id="password"
+                                   placeholder="Enter your password"
+                                   required oninvalid="registerValidation()">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control item" name="username" id="username"
-                               placeholder="Enter your username"
-                               required oninvalid="registerValidation()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" class="form-control item" name="email" id="email"
+                                   placeholder="Enter your email"
+                                   required oninvalid="registerValidation()">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="password" class="form-control item" name="repeatedPassword" id="repeatedPassword"
+                                   placeholder="Confirm your password" required oninvalid="registerValidation()">
+                        </div>
                     </div>
                 </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" class="form-control item" name="email" id="email"
-                               placeholder="Enter your email"
-                               required oninvalid="registerValidation()">
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <input type="text" onfocus="(this.type='date')" class="form-control item" name="birthDate"
+                                   id="birthDate"
+                                   placeholder="Enter your date of birth" required oninvalid="registerValidation()">
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="password" class="form-control item" name="password" id="password"
-                               placeholder="Enter your password"
-                               required oninvalid="registerValidation()">
-                    </div>
-                </div>
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="text" onfocus="(this.type='date')" class="form-control item" name="birthDate"
-                               id="birthDate"
-                               placeholder="Enter your date of birth" required oninvalid="registerValidation()">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-6">
-                    <div class="form-group">
-                        <input type="password" class="form-control item" name="repeatedPassword" id="repeatedPassword"
-                               placeholder="Confirm your password" required oninvalid="registerValidation()">
-                    </div>
-                </div>
-            </div>
-            <div class="form-group text-center d-flex flex-column align-items-center">
-                <button type="submit" class="btn btn-block login">REGISTER</button>
-                <th:block th:if="${hasError}">
-                    <div class="alert alert-danger py-1 mt-4" role="alert">
+                <div class="form-group text-center d-flex flex-column align-items-center">
+
+                    <th:block th:if="${hasError}">
+                        <div class="alert alert-danger py-1 mt-4" role="alert">
+                            <div>
+                                <i class="fa fa-warning"></i>&nbsp;
+                                <span>
+                                <th:block th:text="${error}"/>
+                            </span>
+                            </div>
+                        </div>
+                    </th:block>
+                    <div class="alert alert-danger py-1 mt-4 required-register-fields" role="alert">
                         <div>
                             <i class="fa fa-warning"></i>&nbsp;
                             <span>
-                                <th:block th:text="${error}"/>
-                            </span>
-                        </div>
-                    </div>
-                </th:block>
-                <div class="alert alert-danger py-1 mt-4 required-register-fields" role="alert">
-                    <div>
-                        <i class="fa fa-warning"></i>&nbsp;
-                        <span>
                                 All of the fields are required!
                         </span>
+                        </div>
                     </div>
                 </div>
             </div>
-        </form>
-        <div class="additional">
-            <h5>You already have an account?</h5>
-            <div class="text-center">
-                <a href="/login" type="button" class="btn btn-block">
-                    LOGIN
-                </a>
+            <div class="additional">
+                <button type="submit" class="btn mb-3">SIGN UP</button>
             </div>
-        </div>
+        </form>
     </div>
 </div>
 
