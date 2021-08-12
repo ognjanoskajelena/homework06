@@ -1,0 +1,14 @@
+#faq .title {
+    color: rgba(13, 24, 33, 1);
+    font-weight: 900;
+    border-left: 5px solid rgba(180, 205, 228, 1);
+}
+
+#faq #faqsAccordion h2 button {
+    color: rgba(13, 24, 33, 1);
+}
+
+#faq #faqsAccordion .accordion-body {
+    color: rgba(52, 73, 102, 1);
+    font-size: 2.35vh;
+}

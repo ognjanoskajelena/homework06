@@ -19,6 +19,16 @@ public class HomeController {
         return "master-template";
     }
 
+    @GetMapping("/faq")
+    public String getFaqPage(Model model) {
+        model.addAttribute("headTitle", "Home");
+        model.addAttribute("style1", "header.css");
+        model.addAttribute("style2", "faq.css");
+        model.addAttribute("style3", "footer.css");
+        model.addAttribute("bodyContent", "faq");
+        return "master-template";
+    }
+
     @GetMapping("/access-denied")
     public String getAccessDeniedPage() {
         return "access_denied";

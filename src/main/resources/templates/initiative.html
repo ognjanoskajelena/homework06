@@ -32,7 +32,7 @@
                                 <div class="follow">
                                     <a title="Join this initiative"
                                        th:href="@{'/initiatives/{id}/take-part' (id=${initiative.getId()})}"
-                                       class="btn bell"><i class="fa fa-bell"></i> &nbsp;Take part
+                                       class="btn bell"><i class="fa fa-bell"></i> &nbsp;Join this initiative
                                     </a>
                                 </div>
                             </div>
@@ -212,7 +212,7 @@
                         </div>
                     </div>
                     <div id="feedback" class="h-100 p-3 text-center fs-4 text-muted">
-                        Thank you! Your response is successfully delivered.
+                        Thank you! Your response has been delivered.
                     </div>
                 </div>
             </div>
@@ -308,7 +308,8 @@
                                           placeholder="Enter your comment here..." required></textarea>
                         </div>
                         <div class="col-1 text-center px-0">
-                            <button th:user="${#request.getRemoteUser()}" type="submit" id="btn-post">
+                            <button th:user="${#request.getRemoteUser()}" type="submit" id="btn-post"
+                                    title="Send">
                                 <i class="fa fa-send"></i>&nbsp;
                             </button>
                         </div>
