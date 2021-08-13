@@ -24,9 +24,4 @@ public class MultipleChoiceQuestion extends PollQuestion {
         super(content, PollQuestionType.MULTIPLE, poll);
         this.choices = new ArrayList<>();
     }
-
-    public MultipleChoiceQuestion(String content, Poll poll, List<Choice> choices) {
-        super(content, PollQuestionType.MULTIPLE, poll);
-        this.choices = choices;
-    }
 }

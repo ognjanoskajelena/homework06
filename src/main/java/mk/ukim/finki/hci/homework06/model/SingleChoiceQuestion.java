@@ -24,9 +24,4 @@ public class SingleChoiceQuestion extends PollQuestion {
         super(content, PollQuestionType.SINGLE, poll);
         this.choices = new ArrayList<>();
     }
-
-    public SingleChoiceQuestion(String content, Poll poll, List<Choice> choices) {
-        super(content, PollQuestionType.SINGLE, poll);
-        this.choices = choices;
-    }
 }
