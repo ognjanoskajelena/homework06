@@ -33,27 +33,12 @@
 
 .footer .actual-footer .widget-about .social li a {
     display: block;
-    width: 35px;
-    height: 35px;
-    line-height: 33px;
+    width: 40px;
+    height: 40px;
     text-align: center;
     border-radius: 50%;
     background-color: transparent;
     color: #344966ff;
-    font-size: 14px;
-    -webkit-transition: 0.5s ease-out 0s;
-    -moz-transition: 0.5s ease-out 0s;
-    -o-transition: 0.5s ease-out 0s;
-    transition: 0.5s ease-out 0s;
-}
-
-.footer .actual-footer .widget-about .social li a:hover,
-.footer .actual-footer .widget-about .social li a:focus {
-    background-image: -moz-linear-gradient(0deg, #3A6A92 0%, #344966ff 100%);
-    background-image: -webkit-linear-gradient(0deg, #3A6A92 0%, #344966ff 100%);
-    background-image: -ms-linear-gradient(0deg, #3A6A92 0%, #344966ff 100%);
-    color: #fff8f0ff;
-    box-shadow: 2.5px 4.33px 15px 0 rgba(180, 205, 236, 0.5);
 }
 
 .footer .actual-footer .widget-links ul li {

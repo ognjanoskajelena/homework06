@@ -369,7 +369,7 @@
                     <div class="px-2"
                          th:each="event : ${initiative.getEvents()}"
                          th:if="${!event.isClosed()}">
-                        <h5 class="py-3 px-2 fs-4">Latest event</h5>
+                        <h5 class="py-3 px-2 fs-4">Incoming event</h5>
                         <div class="card mb-2">
                             <div class="card-header pt-3">
                                 <th:block th:text="${event.getTitle()}"/>
